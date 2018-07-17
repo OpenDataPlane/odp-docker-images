@@ -1,0 +1,12 @@
+sudo: true
+dist: trusty
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t travis-odp-lng-x86 ./x86_64
+      - docker images
+      - docker tag travis-odp-lng $DOCKER_USERNAME/travis-odp-lng-x86
+      - docker push $DOCKER_USERNAME/travis-odp-lng-x86
