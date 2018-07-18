@@ -1,6 +1,11 @@
 sudo: true
 dist: trusty
 
+# This travis build task expects following env to be set:
+#
+# DOCKER_USERNAME  - login to hub.docker.com
+# DOCKER_PASSWORD  - password to hub.docker.com
+# DOCKER_NAMESPACE - name spase on hub.docker.com (same as user name for private images)
 
 jobs:
   include:
@@ -9,5 +14,5 @@ jobs:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -t travis-odp-lng-x86 ./x86_64
       - docker images
-      - docker tag travis-odp-lng-x86 $DOCKER_USERNAME/travis-odp-lng-x86
-      - docker push $DOCKER_USERNAME/travis-odp-lng-x86
+      - docker tag travis-odp-lng-x86 $DOCKER_NAMESPACE/travis-odp-lng-x86
+      - docker push $DOCKER_NAMESPACE/travis-odp-lng-x86
