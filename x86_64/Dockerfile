@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt-get update
+RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
   asciidoctor \
@@ -22,5 +22,8 @@ RUN apt-get install -yy \
   xsltproc \
   git \
   iproute2 \
+  libdpdk-dev \
+  dpdk \
+  dpdk-dev \
   python-pip && \
 pip install coverage
