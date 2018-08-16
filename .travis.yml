@@ -11,8 +11,25 @@ jobs:
   include:
     - stage: build docker image
       script:
+      - echo "building ubuntu-18.04"
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -t travis-odp-lng-x86 ./x86_64
       - docker images
       - docker tag travis-odp-lng-x86 $DOCKER_NAMESPACE/travis-odp-lng-x86
       - docker push $DOCKER_NAMESPACE/travis-odp-lng-x86
+    - stage: build docker image
+      script:
+      - echo "building ubuntu-14.04.05 with cross tools"
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t travis-odp-lng-ubuntu_14.04.05 ./ubuntu_14.04.05
+      - docker images
+      - docker tag travis-odp-lng-ubuntu_14.04.05 $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05
+      - docker push $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05
+    - stage: build docker image
+      script:
+      - echo "building ubuntu-14.04.05_i386 with cross tools"
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t travis-odp-lng-ubuntu_14.04.05_i386 ./ubuntu_14.04.05_i386
+      - docker images
+      - docker tag travis-odp-lng-ubuntu_14.04.05_i386 $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05_i386
+      - docker push $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05_i386
