@@ -1,4 +1,6 @@
 sudo: true
+services:
+  - docker
 dist: trusty
 
 # This travis build task expects following env to be set:
