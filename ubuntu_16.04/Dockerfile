@@ -38,6 +38,10 @@ RUN apt-get install -yy --no-install-recommends \
 	pkg-config-arm-linux-gnueabihf \
 	crossbuild-essential-powerpc \
 	pkg-config-powerpc-linux-gnu \
+	lib32stdc++-5-dev \
+	libstdc++-5-dev:arm64 \
+	libstdc++-5-dev:armhf \
+	libstdc++-5-dev:powerpc \
 	libdpdk-dev:amd64 \
 	libdpdk-dev:i386 \
 	libdpdk-dev:armhf \
