@@ -9,29 +9,14 @@ dist: trusty
 # DOCKER_PASSWORD  - password to hub.docker.com
 # DOCKER_NAMESPACE - name spase on hub.docker.com (same as user name for private images)
 
-jobs:
-  include:
-    - stage: build docker image
-      script:
-      - echo "building ubuntu-18.04"
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t travis-odp-lng-x86 ./x86_64
-      - docker images
-      - docker tag travis-odp-lng-x86 $DOCKER_NAMESPACE/travis-odp-lng-x86
-      - docker push $DOCKER_NAMESPACE/travis-odp-lng-x86
-    - stage: build docker image
-      script:
-      - echo "building ubuntu-14.04.05 with cross tools"
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t travis-odp-lng-ubuntu_14.04.05 ./ubuntu_14.04.05
-      - docker images
-      - docker tag travis-odp-lng-ubuntu_14.04.05 $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05
-      - docker push $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05
-    - stage: build docker image
-      script:
-      - echo "building ubuntu-14.04.05_i386 with cross tools"
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t travis-odp-lng-ubuntu_14.04.05_i386 ./ubuntu_14.04.05_i386
-      - docker images
-      - docker tag travis-odp-lng-ubuntu_14.04.05_i386 $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05_i386
-      - docker push $DOCKER_NAMESPACE/travis-odp-lng-ubuntu_14.04.05_i386
+env:
+  - DOCKER_IMAGE=travis-odp-lng-x86 IMGDIR=x86_64
+  - DOCKER_IMAGE=travis-odp-lng-ubuntu_14.04.05 IMGDIR=ubuntu_14.04.05
+  - DOCKER_IMAGE=travis-odp-lng-ubuntu_14.04.05_i386 IMGDIR=ubuntu_14.04.05_i386
+
+script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t "$DOCKER_IMAGE" "$IMGDIR"
+  - docker images
+  - docker tag "$DOCKER_IMAGE" "$DOCKER_NAMESPACE/$DOCKER_IMAGE"
+  - docker push "$DOCKER_NAMESPACE/$DOCKER_IMAGE"
