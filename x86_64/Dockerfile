@@ -17,6 +17,7 @@ RUN apt-get install -yy \
   libpcap-dev \
   libssl-dev \
   libtool \
+  net-tools \
   mscgen \
   ruby-dev \
   xsltproc \
