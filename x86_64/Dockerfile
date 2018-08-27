@@ -26,5 +26,6 @@ RUN apt-get install -yy \
   libdpdk-dev \
   dpdk \
   dpdk-dev \
+  libibverbs-dev \
   python-pip && \
 pip install coverage
