@@ -66,6 +66,7 @@ RUN apt-get install -yy --no-install-recommends \
 	libconfig-dev:armhf \
 	libconfig-dev:arm64 \
 	libconfig-dev:powerpc \
+	kmod \
 	clang \
 	build-essential
 
