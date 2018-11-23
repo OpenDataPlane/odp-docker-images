@@ -26,6 +26,7 @@ RUN apt-get install -yy --no-install-recommends \
 	pkg-config \
 	asciidoctor \
 	doxygen \
+	net-tools \
 	mscgen \
 	graphviz \
 	python-pip \
