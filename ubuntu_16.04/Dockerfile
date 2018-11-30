@@ -32,6 +32,7 @@ RUN apt-get install -yy --no-install-recommends \
 	python-pip \
 	xsltproc \
 	iproute2 \
+	curl \
 	ccache \
 	crossbuild-essential-arm64 \
 	pkg-config-aarch64-linux-gnu \
