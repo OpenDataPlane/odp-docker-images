@@ -70,6 +70,7 @@ RUN apt-get install -yy --no-install-recommends \
 	libconfig-dev:powerpc \
 	kmod \
 	clang \
-	build-essential
+	build-essential \
+	sudo
 
 RUN pip install coverage
