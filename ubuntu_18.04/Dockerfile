@@ -20,6 +20,7 @@ RUN apt-get install -yy \
   net-tools \
   mscgen \
   ruby-dev \
+  sudo \
   xsltproc \
   git \
   iproute2 \
