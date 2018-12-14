@@ -12,6 +12,7 @@ dist: trusty
 env:
   - DOCKER_IMAGE=travis-odp-lng-ubuntu_16.04 IMGDIR=ubuntu_16.04
   - DOCKER_IMAGE=travis-odp-lng-ubuntu_18.04 IMGDIR=ubuntu_18.04
+  - DOCKER_IMAGE=travis-odp-lng-centos_7 IMGDIR=centos_7
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
