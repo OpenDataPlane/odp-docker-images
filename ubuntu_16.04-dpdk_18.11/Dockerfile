@@ -44,5 +44,5 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
-    make -j $(nproc) install T=x86_64-native-linuxapp-gcc DESTDIR=/root/dpdk-install EXTRA_CFLAGS="-fPIC" && \
+    make -j $(nproc) install T=x86_64-native-linuxapp-gcc DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
     cd -
