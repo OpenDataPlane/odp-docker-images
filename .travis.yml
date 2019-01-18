@@ -3,12 +3,6 @@ services:
   - docker
 dist: trusty
 
-# This travis build task expects following env to be set:
-#
-# DOCKER_USERNAME  - login to hub.docker.com
-# DOCKER_PASSWORD  - password to hub.docker.com
-# DOCKER_NAMESPACE - name spase on hub.docker.com (same as user name for private images)
-
 env:
   - DOCKER_IMAGE=travis-odp-lng-ubuntu_16.04 IMGDIR=ubuntu_16.04
   - DOCKER_IMAGE=travis-odp-lng-ubuntu_16.04-dpdk_18.11 IMGDIR=ubuntu_16.04-dpdk_18.11
@@ -16,8 +10,4 @@ env:
   - DOCKER_IMAGE=travis-odp-lng-centos_7 IMGDIR=centos_7
 
 script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t "$DOCKER_IMAGE" "$IMGDIR"
-  - docker images
-  - docker tag "$DOCKER_IMAGE" "$DOCKER_NAMESPACE/$DOCKER_IMAGE"
-  - docker push "$DOCKER_NAMESPACE/$DOCKER_IMAGE"
