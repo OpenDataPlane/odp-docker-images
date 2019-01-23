@@ -39,6 +39,7 @@ RUN cd $HOME && \
     cd dpdk && \
     make config T=x86_64-native-linuxapp-gcc O=x86_64-native-linuxapp-gcc && \
     cd x86_64-native-linuxapp-gcc/ && \
+    sed -ri 's,(CONFIG_RTE_MACHINE=).*,\1"default",' .config && \
     sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
     sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
     sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
