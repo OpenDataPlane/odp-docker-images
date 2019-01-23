@@ -28,6 +28,7 @@ RUN apt-get install -yy --no-install-recommends \
 	libpcap0.8-dev \
 	libssl-dev \
 	libtool \
+	net-tools \
 	mscgen \
 	pkg-config \
 	python-pip \
