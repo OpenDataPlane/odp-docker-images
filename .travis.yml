@@ -4,10 +4,13 @@ services:
 dist: xenial
 
 env:
-  - DOCKER_IMAGE=travis-odp-ubuntu_16.04 IMGDIR=ubuntu_16.04
-  - DOCKER_IMAGE=travis-odp-ubuntu_16.04-dpdk_18.11 IMGDIR=ubuntu_16.04-dpdk_18.11
-  - DOCKER_IMAGE=travis-odp-ubuntu_18.04 IMGDIR=ubuntu_18.04
-  - DOCKER_IMAGE=travis-odp-centos_7 IMGDIR=centos_7
+  - DOCKER_IMAGE=travis-odp-ubuntu_16.04-x86_64 IMGDIR=ubuntu_16.04-x86_64
+  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-i386 IMGDIR=ubuntu_18.04-i386
+  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-x86_64 IMGDIR=ubuntu_18.04-x86_64
+  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-armhf IMGDIR=ubuntu_18.04-armhf
+  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-arm64 IMGDIR=ubuntu_18.04-arm64
+  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-ppc64el IMGDIR=ubuntu_18.04-ppc64el
+  - DOCKER_IMAGE=travis-odp-centos_7-x86_64 IMGDIR=centos_7-x86_64
 
 script:
   - docker build -t "$DOCKER_IMAGE" "$IMGDIR"
