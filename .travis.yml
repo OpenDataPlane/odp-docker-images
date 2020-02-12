@@ -1,7 +1,7 @@
 sudo: true
 services:
   - docker
-dist: trusty
+dist: xenial
 
 env:
   - DOCKER_IMAGE=travis-odp-ubuntu_16.04 IMGDIR=ubuntu_16.04
