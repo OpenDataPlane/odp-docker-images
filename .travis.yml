@@ -4,10 +4,10 @@ services:
 dist: trusty
 
 env:
-  - DOCKER_IMAGE=travis-odp-lng-ubuntu_16.04 IMGDIR=ubuntu_16.04
-  - DOCKER_IMAGE=travis-odp-lng-ubuntu_16.04-dpdk_18.11 IMGDIR=ubuntu_16.04-dpdk_18.11
-  - DOCKER_IMAGE=travis-odp-lng-ubuntu_18.04 IMGDIR=ubuntu_18.04
-  - DOCKER_IMAGE=travis-odp-lng-centos_7 IMGDIR=centos_7
+  - DOCKER_IMAGE=travis-odp-ubuntu_16.04 IMGDIR=ubuntu_16.04
+  - DOCKER_IMAGE=travis-odp-ubuntu_16.04-dpdk_18.11 IMGDIR=ubuntu_16.04-dpdk_18.11
+  - DOCKER_IMAGE=travis-odp-ubuntu_18.04 IMGDIR=ubuntu_18.04
+  - DOCKER_IMAGE=travis-odp-centos_7 IMGDIR=centos_7
 
 script:
   - docker build -t "$DOCKER_IMAGE" "$IMGDIR"
