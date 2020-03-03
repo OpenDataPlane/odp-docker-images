@@ -1,7 +1,9 @@
-sudo: true
+os: linux
+dist: bionic
+
+language: minimal
 services:
   - docker
-dist: xenial
 
 env:
   - DOCKER_IMAGE=travis-odp-ubuntu_16.04-x86_64 IMGDIR=ubuntu_16.04-x86_64
