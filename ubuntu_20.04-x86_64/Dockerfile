@@ -33,11 +33,11 @@ RUN apt-get install -yy \
   libtool \
   mscgen \
   net-tools \
-  python-pip \
+  python3-pip \
   ruby-dev \
   sudo \
   xsltproc && \
-pip install coverage
+pip3 install coverage
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
