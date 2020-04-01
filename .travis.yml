@@ -6,15 +6,15 @@ services:
   - docker
 
 env:
-  - DOCKER_IMAGE=travis-odp-ubuntu_16.04-x86_64 IMGDIR=ubuntu_16.04-x86_64
-  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-i386 IMGDIR=ubuntu_18.04-i386
-  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-x86_64 IMGDIR=ubuntu_18.04-x86_64
-  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-armhf IMGDIR=ubuntu_18.04-armhf
-  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-arm64 IMGDIR=ubuntu_18.04-arm64
-  - DOCKER_IMAGE=travis-odp-ubuntu_18.04-ppc64el IMGDIR=ubuntu_18.04-ppc64el
-  - DOCKER_IMAGE=travis-odp-ubuntu_20.04-x86_64 IMGDIR=ubuntu_20.04-x86_64
-  - DOCKER_IMAGE=travis-odp-centos_7-x86_64 IMGDIR=centos_7-x86_64
-  - DOCKER_IMAGE=travis-odp-centos_8-x86_64 IMGDIR=centos_8-x86_64
+  - IMAGE_DIR=ubuntu_16.04-x86_64
+  - IMAGE_DIR=ubuntu_18.04-arm64
+  - IMAGE_DIR=ubuntu_18.04-armhf
+  - IMAGE_DIR=ubuntu_18.04-i386
+  - IMAGE_DIR=ubuntu_18.04-ppc64el
+  - IMAGE_DIR=ubuntu_18.04-x86_64
+  - IMAGE_DIR=ubuntu_20.04-x86_64
+  - IMAGE_DIR=centos_7-x86_64
+  - IMAGE_DIR=centos_8-x86_64
 
 script:
-  - docker build -t "$DOCKER_IMAGE" "$IMGDIR"
+  - docker build "$IMAGE_DIR" -t travis-odp-"$IMAGE_DIR"
