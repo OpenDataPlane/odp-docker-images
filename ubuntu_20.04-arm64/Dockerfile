@@ -20,7 +20,7 @@ RUN dpkg --add-architecture arm64 && \
 RUN apt-get update --fix-missing
 
 # Install fails if done together with other packages
-RUN apt-get install -y \
+RUN apt-get install -o APT::Immediate-Configure=false -y \
   libc6:arm64
 
 RUN apt-get install -y \
