@@ -19,6 +19,7 @@ RUN apt-get install -yy \
   automake \
   ccache \
   clang \
+  curl \
   gcc \
   git \
   graphviz \
