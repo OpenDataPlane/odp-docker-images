@@ -37,6 +37,7 @@ RUN apt-get install -y \
   ccache \
   clang \
   gcc \
+  gcc-10 \
   git \
   graphviz \
   iproute2 \
