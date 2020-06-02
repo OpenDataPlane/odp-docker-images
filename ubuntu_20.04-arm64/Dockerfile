@@ -29,7 +29,7 @@ RUN apt-get install -y \
   libcunit1-dev:arm64 \
   libpcap-dev:arm64 \
   libssl-dev:arm64 \
-  libstdc++-9-dev:arm64 \
+  libstdc++-10-dev:arm64 \
   pkg-config-aarch64-linux-gnu \
   asciidoctor \
   autoconf \

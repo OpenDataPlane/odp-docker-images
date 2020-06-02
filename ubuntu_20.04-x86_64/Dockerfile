@@ -31,6 +31,7 @@ RUN apt-get install -yy \
   libnuma-dev \
   libpcap-dev \
   libssl-dev \
+  libstdc++-10-dev \
   libtool \
   mscgen \
   net-tools \
