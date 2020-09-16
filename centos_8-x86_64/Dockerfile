@@ -18,6 +18,7 @@ RUN yum install -y \
 	clang \
 	CUnit-devel \
 	curl \
+	diffutils \
 	doxygen \
 	gcc \
 	gcc-c++ \
