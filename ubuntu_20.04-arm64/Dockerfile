@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=18.11 \
+ENV DPDK_VERSION=v18.11.10 \
 	RTE_ARCH=arm64 \
 	RTE_TARGET=arm64-armv8a-linuxapp-gcc
 
