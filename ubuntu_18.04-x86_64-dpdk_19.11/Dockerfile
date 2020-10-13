@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV DPDK_VERSION=19.11 \
+ENV DPDK_VERSION=v19.11.5 \
 	RTE_ARCH=x86_64 \
 	RTE_TARGET=x86_64-native-linuxapp-gcc
 

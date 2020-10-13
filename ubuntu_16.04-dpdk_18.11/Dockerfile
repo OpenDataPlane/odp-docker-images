@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ENV DPDK_VERSION=18.11 \
+ENV DPDK_VERSION=v18.11.10 \
     RTE_ARCH=x86_64 \
     RTE_TARGET=x86_64-native-linuxapp-gcc
 
