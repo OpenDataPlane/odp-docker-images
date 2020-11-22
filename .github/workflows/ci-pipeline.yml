@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+  # Run tests for any PRs
+  pull_request:
+
+jobs:
+  Build:
+    runs-on: ubuntu-18.04
+    env:
+      IMAGE_DIR: ${{matrix.image}}
+      IMAGE_NAME: odp-ci-${{matrix.image}}
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['ubuntu_16.04-x86_64', 'ubuntu_18.04-arm64', 'ubuntu_18.04-armhf', 'ubuntu_18.04-i386', 'ubuntu_18.04-ppc64el', 'ubuntu_18.04-x86_64', 'ubuntu_18.04-x86_64-dpdk_18.11', 'ubuntu_18.04-x86_64-dpdk_19.11', 'ubuntu_20.04-arm64', 'ubuntu_20.04-x86_64', 'centos_7-x86_64', 'centos_8-x86_64']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build $IMAGE_DIR -t $IMAGE_NAME
+
+      - name: Log into registry
+        if: github.event_name == 'push'
+        run: echo "${{ secrets.CONTAINER_REGISTRY_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        if: github.event_name == 'push'
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
