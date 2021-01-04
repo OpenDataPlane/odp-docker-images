@@ -5,7 +5,7 @@ ENV DPDK_VERSION=v19.11.5 \
     RTE_TARGET=x86_64-native-linuxapp-gcc
 
 RUN dnf install -y 'dnf-command(config-manager)'
-RUN dnf config-manager --set-enabled PowerTools
+RUN dnf config-manager --set-enabled powertools
 
 RUN yum update -y
 
