@@ -25,6 +25,7 @@ RUN apt-get install -o APT::Immediate-Configure=false -y \
 
 RUN apt-get install -y \
   crossbuild-essential-arm64 \
+  libcli-dev:arm64 \
   libconfig-dev:arm64 \
   libcunit1-dev:arm64 \
   libpcap-dev:arm64 \

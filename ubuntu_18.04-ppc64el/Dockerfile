@@ -17,6 +17,7 @@ RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
   crossbuild-essential-ppc64el \
+  libcli-dev:ppc64el \
   libconfig-dev:ppc64el \
   libcunit1-dev:ppc64el \
   libdpdk-dev:ppc64el \

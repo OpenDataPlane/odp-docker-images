@@ -17,6 +17,7 @@ RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
   crossbuild-essential-arm64 \
+  libcli-dev:arm64 \
   libconfig-dev:arm64 \
   libcunit1-dev:arm64 \
   libdpdk-dev:arm64 \

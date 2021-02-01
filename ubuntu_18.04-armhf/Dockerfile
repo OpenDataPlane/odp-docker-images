@@ -17,6 +17,7 @@ RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
   crossbuild-essential-armhf \
+  libcli-dev:armhf \
   libconfig-dev:armhf \
   libcunit1-dev:armhf \
   libpcap-dev:armhf \
