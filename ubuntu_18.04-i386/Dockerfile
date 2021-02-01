@@ -14,6 +14,7 @@ RUN dpkg --add-architecture i386
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
+  libcli-dev:i386 \
   libconfig-dev:i386 \
   libcunit1-dev:i386 \
   libdpdk-dev:i386 \

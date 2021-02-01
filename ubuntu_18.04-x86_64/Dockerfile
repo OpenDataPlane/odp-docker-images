@@ -25,6 +25,7 @@ RUN apt-get install -yy \
   graphviz \
   iproute2 \
   kmod \
+  libcli-dev \
   libconfig-dev \
   libcunit1-dev \
   libibverbs-dev \

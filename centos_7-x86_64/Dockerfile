@@ -22,6 +22,7 @@ RUN yum install -y \
 	graphviz \
 	kmod \
 	libatomic \
+	libcli-devel \
 	libconfig-devel \
 	libpcap-devel \
 	libtool \

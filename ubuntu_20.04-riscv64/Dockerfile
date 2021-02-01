@@ -21,6 +21,7 @@ RUN apt-get install -o APT::Immediate-Configure=false -y \
 
 RUN apt-get install -y \
   crossbuild-essential-riscv64 \
+  libcli-dev:riscv64 \
   libconfig-dev:riscv64 \
   libcunit1-dev:riscv64 \
   libpcap-dev:riscv64 \
