@@ -2,7 +2,8 @@ FROM centos:7
 
 ENV DPDK_VERSION=v19.11.5 \
     RTE_ARCH=x86_64 \
-    RTE_TARGET=x86_64-native-linuxapp-gcc
+    RTE_TARGET=x86_64-native-linuxapp-gcc \
+    CUNIT_VERSION=2.1-3
 
 RUN yum update -y
 
@@ -12,8 +13,8 @@ RUN yum install -y \
 RUN yum install -y \
 	autoconf \
 	automake \
+	bzip2 \
 	clang \
-	CUnit-devel \
 	curl \
 	doxygen \
 	gcc \
@@ -32,6 +33,17 @@ RUN yum install -y \
 	openssl-devel \
 	pkgconfig \
 	sudo
+
+
+RUN cd $HOME && \
+    curl -sSOL http://sourceforge.net/projects/cunit/files/CUnit/${CUNIT_VERSION}/CUnit-${CUNIT_VERSION}.tar.bz2 && \
+    tar -jxf *.bz2 && \
+    cd CUnit* && \
+    ./bootstrap && \
+    ./configure && \
+    make && \
+    make install && \
+    cd -
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
