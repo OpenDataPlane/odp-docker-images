@@ -1,76 +1,50 @@
 FROM ubuntu:16.04
 
+ENV DPDK_VERSION=v19.11.6 \
+    RTE_ARCH=x86_64 \
+    RTE_TARGET=x86_64-native-linuxapp-gcc
+
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy --no-install-recommends \
 	software-properties-common
 
-RUN sed -e 's/^deb http/deb [arch=amd64,i386] http/g' /etc/apt/sources.list -i
-
-RUN add-apt-repository -y ppa:lumag/odp-xenial
-
-RUN dpkg --add-architecture i386 && \
- dpkg --add-architecture armhf && \
- dpkg --add-architecture arm64 && \
- dpkg --add-architecture powerpc && \
- apt-add-repository -y "deb [arch=armhf,arm64,powerpc] http://ports.ubuntu.com xenial main universe" && \
- apt-add-repository -y "deb [arch=armhf,arm64,powerpc] http://ports.ubuntu.com xenial-updates main universe"
-
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy --no-install-recommends \
-	git-core \
+	asciidoctor \
 	autoconf \
 	automake \
-	libtool \
-	pkg-config \
-	asciidoctor \
+	build-essential \
+	ccache \
+	clang \
 	doxygen \
+	git-core \
+	graphviz \
+	iproute2 \
+	libconfig-dev \
+	libcunit1-dev \
+	libnuma-dev \
+	libpcap0.8-dev \
+	libssl-dev \
+	libtool \
 	net-tools \
 	mscgen \
-	graphviz \
+	pkg-config \
 	python-pip \
-	xsltproc \
-	iproute2 \
-	curl \
-	ccache \
-	crossbuild-essential-arm64 \
-	pkg-config-aarch64-linux-gnu \
-	crossbuild-essential-armhf \
-	pkg-config-arm-linux-gnueabihf \
-	crossbuild-essential-powerpc \
-	pkg-config-powerpc-linux-gnu \
-	lib32stdc++-5-dev \
-	libstdc++-5-dev:arm64 \
-	libstdc++-5-dev:armhf \
-	libstdc++-5-dev:powerpc \
-	libdpdk-dev:amd64 \
-	libdpdk-dev:i386 \
-	libdpdk-dev:armhf \
-	libdpdk-dev:arm64 \
-	libcunit1-dev:amd64 \
-	libcunit1-dev:i386 \
-	libcunit1-dev:armhf \
-	libcunit1-dev:arm64 \
-	libcunit1-dev:powerpc \
-	libpcap0.8-dev:amd64 \
-	libpcap0.8-dev:i386 \
-	libpcap0.8-dev:armhf \
-	libpcap0.8-dev:arm64 \
-	libpcap0.8-dev:powerpc \
-	libssl-dev:amd64 \
-	libssl-dev:i386 \
-	libssl-dev:armhf \
-	libssl-dev:arm64 \
-	libssl-dev:powerpc \
-	libconfig-dev:amd64 \
-	libconfig-dev:i386 \
-	libconfig-dev:armhf \
-	libconfig-dev:arm64 \
-	libconfig-dev:powerpc \
-	kmod \
-	clang \
-	build-essential \
-	sudo
+	sudo \
+	xsltproc
 
-RUN pip install coverage
+RUN cd $HOME && \
+    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    cd dpdk && \
+    make config T=${RTE_TARGET} O=${RTE_TARGET} && \
+    cd ${RTE_TARGET} && \
+    sed -ri 's,(CONFIG_RTE_MACHINE=).*,\1"default",' .config && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
+    sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
+    sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
+    cd .. && \
+    make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
+    cd -
