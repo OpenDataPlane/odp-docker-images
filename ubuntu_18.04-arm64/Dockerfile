@@ -1,5 +1,10 @@
 FROM ubuntu:18.04
 
+ENV DPDK_VERSION=v19.11.6 \
+	RTE_ARCH=arm64 \
+	RTE_TARGET=arm64-armv8a-linuxapp-gcc \
+	CROSS_TOOLS=aarch64-linux-gnu-
+
 RUN apt-get update
 
 RUN apt-get install -yy --no-install-recommends \
@@ -20,7 +25,6 @@ RUN apt-get install -yy \
   libcli-dev:arm64 \
   libconfig-dev:arm64 \
   libcunit1-dev:arm64 \
-  libdpdk-dev:arm64 \
   libpcap-dev:arm64 \
   libssl-dev:arm64 \
   libstdc++-7-dev:arm64 \
@@ -44,3 +48,18 @@ RUN apt-get install -yy \
   sudo \
   xsltproc && \
 pip install coverage
+
+RUN cd $HOME && \
+    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    cd dpdk && \
+    make config T=${RTE_TARGET} O=${RTE_TARGET} && \
+    cd ${RTE_TARGET} && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
+    sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
+    sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_VHOST_NUMA=).*,\1n,' .config && \
+    sed -ri 's,(CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=).*,\1n,' .config && \
+    cd .. && \
+    make -j $(nproc) install CROSS=${CROSS_TOOLS} T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
+    cd -
