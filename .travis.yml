@@ -19,8 +19,6 @@ env:
   - IMAGE_DIR=ubuntu_18.04-i386
   - IMAGE_DIR=ubuntu_18.04-ppc64el
   - IMAGE_DIR=ubuntu_18.04-x86_64
-  - IMAGE_DIR=ubuntu_18.04-x86_64-dpdk_18.11
-  - IMAGE_DIR=ubuntu_18.04-x86_64-dpdk_19.11
   - IMAGE_DIR=ubuntu_20.04-arm64
   - IMAGE_DIR=ubuntu_20.04-x86_64
   - IMAGE_DIR=centos_7-x86_64
