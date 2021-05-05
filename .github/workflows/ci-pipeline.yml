@@ -22,13 +22,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ['ubuntu_16.04-x86_64', 'ubuntu_18.04-arm64', 'ubuntu_18.04-armhf', 'ubuntu_18.04-i386', 'ubuntu_18.04-ppc64el', 'ubuntu_18.04-x86_64', 'ubuntu_18.04-x86_64-dpdk_18.11', 'ubuntu_20.04-arm64', 'ubuntu_20.04-riscv64', 'ubuntu_20.04-x86_64', 'ubuntu_20.04-x86_64-coverity-linux-generic', 'ubuntu_20.04-x86_64-dpdk_20.11', 'centos_7-x86_64', 'centos_8-x86_64']
+        image: ['ubuntu_16.04-x86_64', 'ubuntu_18.04-arm64', 'ubuntu_18.04-armhf',
+                'ubuntu_18.04-i386', 'ubuntu_18.04-ppc64el', 'ubuntu_18.04-x86_64',
+                'ubuntu_18.04-x86_64-dpdk_18.11', 'ubuntu_20.04-arm64', 'ubuntu_20.04-riscv64',
+                'ubuntu_20.04-x86_64', 'ubuntu_20.04-x86_64-dpdk_20.11',
+                'centos_7-x86_64', 'centos_8-x86_64']
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN }} $IMAGE_DIR -t $IMAGE_NAME
+        run: docker build $IMAGE_DIR -t $IMAGE_NAME
 
       - name: Log into registry
         if: github.event_name == 'push'
@@ -72,7 +76,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN }} $IMAGE_DIR -t $IMAGE_NAME
+        run: docker build $IMAGE_DIR -t $IMAGE_NAME
 
       - name: Log into registry
         if: github.event_name == 'push'
@@ -80,6 +84,48 @@ jobs:
 
       - name: Push image
         if: github.event_name == 'push'
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
+  Build_coverity:
+    runs-on: ubuntu-18.04
+    env:
+      COVERITY_TOKEN: ${{ secrets.COVERITY_TOKEN }}
+      IMAGE_DIR: ${{matrix.image}}
+      IMAGE_NAME: odp-ci-${{matrix.image}}
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['ubuntu_20.04-x86_64-coverity-linux-generic']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        if: ${{ env.COVERITY_TOKEN }}
+        run: docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN }} $IMAGE_DIR -t $IMAGE_NAME
+
+      - name: Log into registry
+        if: ${{ env.COVERITY_TOKEN && github.event_name == 'push' }}
+        run: echo "${{ secrets.CONTAINER_REGISTRY_TOKEN }}" | docker login ghcr.io -u ${{ secrets.CONTAINER_REGISTRY_USER }} --password-stdin
+
+      - name: Push image
+        if: ${{ env.COVERITY_TOKEN && github.event_name == 'push' }}
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
 
