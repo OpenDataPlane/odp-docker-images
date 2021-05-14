@@ -52,3 +52,9 @@ RUN cd $HOME && \
     cd .. && \
     make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
     cd -
+
+RUN cd $HOME && \
+    git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
+    cd aarch64cryptolib && \
+    OPT=big make && \
+    cd -
