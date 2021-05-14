@@ -23,6 +23,7 @@ RUN yum install -y \
 	gcc \
 	gcc-c++ \
 	git-core \
+	glibc-static \
 	graphviz \
 	kmod \
 	libatomic \
@@ -47,4 +48,10 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
+    cd -
+
+RUN cd $HOME && \
+    git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
+    cd aarch64cryptolib && \
+    OPT=big make && \
     cd -
