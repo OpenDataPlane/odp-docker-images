@@ -50,3 +50,8 @@ RUN apt-get install -y \
   xsltproc && \
 pip3 install coverage
 
+RUN cd $HOME && \
+    git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
+    cd aarch64cryptolib && \
+    make CC=aarch64-linux-gnu-gcc && \
+    cd -
