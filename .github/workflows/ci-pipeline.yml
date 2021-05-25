@@ -105,27 +105,37 @@ jobs:
   Build_coverity:
     runs-on: ubuntu-18.04
     env:
-      COVERITY_TOKEN: ${{ secrets.COVERITY_TOKEN }}
+      COVERITY_TOKEN_ODP: ${{ secrets.COVERITY_TOKEN_ODP }}
+      COVERITY_TOKEN_ODP_DPDK: ${{ secrets.COVERITY_TOKEN_ODP_DPDK }}
       IMAGE_DIR: ${{matrix.image}}
       IMAGE_NAME: odp-ci-${{matrix.image}}
     strategy:
       fail-fast: false
       matrix:
-        image: ['ubuntu_20.04-x86_64-coverity-linux-generic']
+        image: ['ubuntu_20.04-x86_64-coverity-linux-generic',
+                'ubuntu_20.04-x86_64-coverity-linux-dpdk']
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        if: ${{ env.COVERITY_TOKEN }}
-        run: docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN }} $IMAGE_DIR -t $IMAGE_NAME
+      - name: Build linux-generic image
+        if: ${{ env.COVERITY_TOKEN_ODP && env.IMAGE_DIR == 'ubuntu_20.04-x86_64-coverity-linux-generic' }}
+        run: |
+          docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN_ODP }} $IMAGE_DIR -t $IMAGE_NAME
+          echo "push_image=true" >> $GITHUB_ENV
+
+      - name: Build linux-dpdk image
+        if: ${{ env.COVERITY_TOKEN_ODP_DPDK && env.IMAGE_DIR == 'ubuntu_20.04-x86_64-coverity-linux-dpdk' }}
+        run: |
+          docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN_ODP_DPDK }} $IMAGE_DIR -t $IMAGE_NAME
+          echo "push_image=true" >> $GITHUB_ENV
 
       - name: Log into registry
-        if: ${{ env.COVERITY_TOKEN && github.event_name == 'push' }}
+        if: env.push_image
         run: echo "${{ secrets.CONTAINER_REGISTRY_TOKEN }}" | docker login ghcr.io -u ${{ secrets.CONTAINER_REGISTRY_USER }} --password-stdin
 
       - name: Push image
-        if: ${{ env.COVERITY_TOKEN && github.event_name == 'push' }}
+        if: env.push_image
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
 
