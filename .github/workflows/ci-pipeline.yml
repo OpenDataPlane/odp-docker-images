@@ -70,7 +70,7 @@ jobs:
       matrix:
         image: ['ubuntu_16.04-arm64-native', 'ubuntu_18.04-arm64-native',
                 'ubuntu_18.04-arm64-native-dpdk_18.11', 'ubuntu_20.04-arm64-native',
-                'centos_8-arm64-native']
+                'ubuntu_20.04-arm64-native-dpdk_20.11', 'centos_8-arm64-native']
 
     steps:
       - uses: actions/checkout@v2
