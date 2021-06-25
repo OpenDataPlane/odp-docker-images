@@ -54,5 +54,5 @@ RUN cd $HOME && \
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
     cd aarch64cryptolib && \
-    OPT=big make && \
+    make && \
     cd -
