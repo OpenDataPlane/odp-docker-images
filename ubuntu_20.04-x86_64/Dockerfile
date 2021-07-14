@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ENV DPDK_VERSION=v19.11.6 \
+  IPSEC_MB_VERSION=v0.55 \
 	RTE_ARCH=x86_64 \
 	RTE_TARGET=x86_64-native-linuxapp-gcc
 
@@ -35,6 +36,7 @@ RUN apt-get install -yy \
   libstdc++-10-dev \
   libtool \
   mscgen \
+  nasm \
   net-tools \
   python3-pip \
   ruby-dev \
@@ -43,11 +45,20 @@ RUN apt-get install -yy \
 pip3 install coverage
 
 RUN cd $HOME && \
+    git clone https://github.com/intel/intel-ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
+    cd ipsec-mb && \
+    make -j $(nproc) && \
+    make install && \
+    cd -
+
+RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     make config T=${RTE_TARGET} O=${RTE_TARGET} && \
     cd ${RTE_TARGET} && \
     sed -ri 's,(CONFIG_RTE_MACHINE=).*,\1"default",' .config && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_AESNI_GCM=).*,\1y,' .config && \
+    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_AESNI_MB=).*,\1y,' .config && \
     sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
     sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
     sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \

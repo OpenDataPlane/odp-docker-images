@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ENV DPDK_VERSION=v20.11
+  IPSEC_MB_VERSION=v0.55
 
 RUN apt-get update
 
@@ -33,6 +34,7 @@ RUN apt-get install -yy \
   libtool \
   meson \
   mscgen \
+  nasm \
   net-tools \
   ninja-build \
   python3-pip \
@@ -40,6 +42,13 @@ RUN apt-get install -yy \
   sudo \
   xsltproc && \
 pip3 install coverage
+
+RUN cd $HOME && \
+    git clone https://github.com/intel/intel-ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
+    cd ipsec-mb && \
+    make -j $(nproc) && \
+    make install && \
+    cd -
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
