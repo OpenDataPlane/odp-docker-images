@@ -26,7 +26,7 @@ jobs:
                 'ubuntu_18.04-i386', 'ubuntu_18.04-ppc64el', 'ubuntu_18.04-x86_64',
                 'ubuntu_18.04-x86_64-dpdk_18.11', 'ubuntu_20.04-arm64', 'ubuntu_20.04-riscv64',
                 'ubuntu_20.04-x86_64', 'ubuntu_20.04-x86_64-dpdk_20.11',
-                'centos_7-x86_64', 'centos_8-x86_64']
+                'centos_7-x86_64', 'centos_8-x86_64', 'ubuntu_20.04-x86_64-dpdk_21.11']
 
     steps:
       - uses: actions/checkout@v2
@@ -70,7 +70,8 @@ jobs:
       matrix:
         image: ['ubuntu_16.04-arm64-native', 'ubuntu_18.04-arm64-native',
                 'ubuntu_18.04-arm64-native-dpdk_18.11', 'ubuntu_20.04-arm64-native',
-                'ubuntu_20.04-arm64-native-dpdk_20.11', 'centos_8-arm64-native']
+                'ubuntu_20.04-arm64-native-dpdk_20.11', 'centos_8-arm64-native',
+                'ubuntu_20.04-arm64-native-dpdk_21.11']
 
     steps:
       - uses: actions/checkout@v2
