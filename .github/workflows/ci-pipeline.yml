@@ -14,7 +14,7 @@ on:
   pull_request:
 
 jobs:
-  Build_x86_64:
+  x86_64:
     runs-on: ubuntu-18.04
     env:
       IMAGE_DIR: ${{matrix.image}}
@@ -33,6 +33,7 @@ jobs:
                 'ubuntu_20.04-x86_64',
                 'ubuntu_20.04-x86_64-dpdk_20.11',
                 'ubuntu_20.04-x86_64-dpdk_21.11',
+                'ubuntu_22.04-x86_64',
                 'centos_7-x86_64',
                 'rocky_linux_8-x86_64']
 
@@ -66,7 +67,7 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
-  Build_arm64:
+  arm64:
     # Ensuring CI is only run on repo where self-hosted runners are installed
     if: ${{ github.repository == 'OpenDataPlane/odp-docker-images' }}
     runs-on: self-hosted
@@ -81,6 +82,7 @@ jobs:
                 'ubuntu_20.04-arm64-native',
                 'ubuntu_20.04-arm64-native-dpdk_20.11',
                 'ubuntu_20.04-arm64-native-dpdk_21.11',
+                'ubuntu_22.04-arm64-native',
                 'rocky_linux_8-arm64-native']
 
     steps:
@@ -113,7 +115,7 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
 
-  Build_coverity:
+  Coverity:
     runs-on: ubuntu-18.04
     env:
       COVERITY_TOKEN_ODP: ${{ secrets.COVERITY_TOKEN_ODP }}
