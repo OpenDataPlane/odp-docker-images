@@ -29,6 +29,8 @@ jobs:
                 'ubuntu_18.04-x86_64',
                 'ubuntu_18.04-x86_64-dpdk_18.11',
                 'ubuntu_20.04-arm64',
+                'ubuntu_20.04-armhf',
+                'ubuntu_20.04-ppc64el',
                 'ubuntu_20.04-riscv64',
                 'ubuntu_20.04-x86_64',
                 'ubuntu_20.04-x86_64-dpdk_20.11',
