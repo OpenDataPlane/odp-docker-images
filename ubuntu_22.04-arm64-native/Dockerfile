@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
-ENV DPDK_VERSION=v20.11.4
+ENV DPDK_VERSION=v20.11.4 \
+  XDP_VERSION=v1.2.3
 
 RUN apt-get update
 
@@ -22,6 +23,7 @@ RUN apt-get install -yy \
   graphviz \
   iproute2 \
   kmod \
+  libbpf-dev \
   libcli-dev \
   libconfig-dev \
   libcunit1-dev \
@@ -31,6 +33,7 @@ RUN apt-get install -yy \
   libssl-dev \
   libstdc++-10-dev \
   libtool \
+  llvm-dev \
   meson \
   mscgen \
   net-tools \
@@ -56,4 +59,12 @@ RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
     cd aarch64cryptolib && \
     make && \
+    cd -
+
+RUN cd $HOME && \
+    git clone --recurse-submodules https://github.com/xdp-project/xdp-tools.git --branch ${XDP_VERSION} --depth 1 ./xdp && \
+    cd xdp && \
+    ./configure && \
+    C_INCLUDE_PATH=/usr/include/aarch64-linux-gnu/ make && \
+    make install && \
     cd -
