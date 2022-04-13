@@ -1,7 +1,8 @@
 FROM ubuntu:22.04
 
 ENV DPDK_VERSION=v20.11.4 \
-  IPSEC_MB_VERSION=v1.1
+  IPSEC_MB_VERSION=v1.1 \
+  XDP_VERSION=v1.2.3
 
 RUN apt-get update
 
@@ -19,10 +20,12 @@ RUN apt-get install -yy \
   ccache \
   clang \
   gcc \
+  gcc-multilib \
   git \
   graphviz \
   iproute2 \
   kmod \
+  libbpf-dev \
   libconfig-dev \
   libcunit1-dev \
   libibverbs-dev \
@@ -31,6 +34,7 @@ RUN apt-get install -yy \
   libssl-dev \
   libstdc++-10-dev \
   libtool \
+  llvm-dev \
   meson \
   mscgen \
   nasm \
@@ -59,4 +63,12 @@ RUN cd $HOME && \
     meson configure -Dmachine=default && \
     ninja && \
     ninja install && \
+    cd -
+
+RUN cd $HOME && \
+    git clone --recurse-submodules https://github.com/xdp-project/xdp-tools.git --branch ${XDP_VERSION} --depth 1 ./xdp && \
+    cd xdp && \
+    ./configure && \
+    make && \
+    make install && \
     cd -
