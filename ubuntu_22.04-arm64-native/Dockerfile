@@ -67,4 +67,5 @@ RUN cd $HOME && \
     ./configure && \
     C_INCLUDE_PATH=/usr/include/aarch64-linux-gnu/ make && \
     make install && \
+    ldconfig /usr/local/lib/ && \
     cd -

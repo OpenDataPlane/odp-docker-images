@@ -71,4 +71,5 @@ RUN cd $HOME && \
     ./configure && \
     make && \
     make install && \
+    ldconfig /usr/local/lib/ && \
     cd -
