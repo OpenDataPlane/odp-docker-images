@@ -34,6 +34,7 @@ RUN yum install -y \
 	net-tools \
 	openssl-devel \
 	pkgconfig \
+	procps \
 	sudo
 
 RUN cd $HOME && \
