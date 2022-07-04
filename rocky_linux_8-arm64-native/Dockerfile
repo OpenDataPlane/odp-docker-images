@@ -22,6 +22,7 @@ RUN yum install -y \
 	doxygen \
 	gcc \
 	gcc-c++ \
+	gcc-toolset-11-libatomic-devel \
 	git-core \
 	glibc-static \
 	graphviz \
