@@ -20,6 +20,9 @@ RUN apt-get install -yy \
   ccache \
   clang \
   gcc \
+  gcc-10 \
+  gcc-11 \
+  gcc-12 \
   gcc-multilib \
   git \
   graphviz \
@@ -33,6 +36,8 @@ RUN apt-get install -yy \
   libpcap-dev \
   libssl-dev \
   libstdc++-10-dev \
+  libstdc++-11-dev \
+  libstdc++-12-dev \
   libtool \
   llvm-dev \
   meson \
