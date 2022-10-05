@@ -21,6 +21,8 @@ RUN apt-get install -yy \
   clang \
   curl \
   gcc \
+  gcc-7 \
+  gcc-8 \
   git \
   graphviz \
   iproute2 \
@@ -32,6 +34,8 @@ RUN apt-get install -yy \
   libnuma-dev \
   libpcap-dev \
   libssl-dev \
+  libstdc++-7-dev \
+  libstdc++-8-dev \
   libtool \
   mscgen \
   net-tools \
