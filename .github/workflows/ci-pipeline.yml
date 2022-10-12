@@ -36,6 +36,7 @@ jobs:
                 'ubuntu_20.04-x86_64-dpdk_20.11',
                 'ubuntu_20.04-x86_64-dpdk_21.11',
                 'ubuntu_22.04-x86_64',
+                'ubuntu_22.04-x86_64-static',
                 'ubuntu_22.04-openssl-x86_64',
                 'centos_7-x86_64',
                 'rocky_linux_8-x86_64']
