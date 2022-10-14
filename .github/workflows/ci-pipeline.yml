@@ -15,7 +15,7 @@ on:
 
 jobs:
   x86_64:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       IMAGE_DIR: ${{matrix.image}}
       IMAGE_NAME: odp-ci-${{matrix.image}}
@@ -120,7 +120,7 @@ jobs:
           docker push $IMAGE_ID:$VERSION
 
   Coverity:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       COVERITY_TOKEN_ODP: ${{ secrets.COVERITY_TOKEN_ODP }}
       COVERITY_TOKEN_ODP_DPDK: ${{ secrets.COVERITY_TOKEN_ODP_DPDK }}
