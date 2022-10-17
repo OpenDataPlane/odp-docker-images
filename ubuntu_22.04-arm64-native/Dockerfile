@@ -58,7 +58,8 @@ RUN cd $HOME && \
     cd build && \
     ninja && \
     ninja install && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
 
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
@@ -73,4 +74,5 @@ RUN cd $HOME && \
     C_INCLUDE_PATH=/usr/include/aarch64-linux-gnu/ make && \
     make install && \
     ldconfig /usr/local/lib/ && \
-    cd -
+    cd $HOME && \
+    rm -r ./xdp

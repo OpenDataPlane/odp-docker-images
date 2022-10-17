@@ -49,7 +49,8 @@ RUN cd $HOME && \
     cd build && \
     ninja && \
     ninja install && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
 
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \

@@ -59,4 +59,5 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk

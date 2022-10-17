@@ -62,7 +62,8 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install CROSS=${CROSS_TOOLS} T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
 
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \

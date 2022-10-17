@@ -43,7 +43,8 @@ RUN cd $HOME && \
     ./configure && \
     make && \
     make install && \
-    cd -
+    cd $HOME && \
+    rm -r ./CUnit*
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
@@ -57,4 +58,5 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=x86_64-native-linuxapp-gcc DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk

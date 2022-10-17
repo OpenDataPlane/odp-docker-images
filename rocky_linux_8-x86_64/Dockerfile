@@ -50,4 +50,5 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=x86_64-native-linuxapp-gcc DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk

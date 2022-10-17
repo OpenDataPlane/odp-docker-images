@@ -49,7 +49,8 @@ RUN cd $HOME && \
     cd ipsec-mb && \
     make -j $(nproc) && \
     make install && \
-    cd -
+    cd $HOME && \
+    rm -r ./ipsec-mb
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
@@ -65,4 +66,5 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
