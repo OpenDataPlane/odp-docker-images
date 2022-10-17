@@ -16,11 +16,9 @@ RUN yum install -y \
 	bzip2 \
 	clang \
 	curl \
-	doxygen \
 	gcc \
 	gcc-c++ \
 	git-core \
-	graphviz \
 	kmod \
 	libatomic \
 	libcli-devel \
@@ -33,7 +31,6 @@ RUN yum install -y \
 	openssl-devel \
 	pkgconfig \
 	sudo
-
 
 RUN cd $HOME && \
     curl -sSOL http://sourceforge.net/projects/cunit/files/CUnit/${CUNIT_VERSION}/CUnit-${CUNIT_VERSION}.tar.bz2 && \
