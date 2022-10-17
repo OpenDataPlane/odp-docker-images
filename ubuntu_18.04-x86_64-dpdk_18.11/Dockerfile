@@ -52,4 +52,5 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk

@@ -49,7 +49,8 @@ RUN cd $HOME && \
     sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
     cd .. && \
     make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
 
 RUN curl -d "token=${COVERITY_TOKEN}&project=${COVERITY_PROJECT}" -o /coverity_tool.tgz https://scan.coverity.com/download/linux64 && \
   mkdir /coverity_tool && \

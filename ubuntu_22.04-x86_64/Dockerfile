@@ -58,7 +58,8 @@ RUN cd $HOME && \
     cd ipsec-mb && \
     make -j $(nproc) && \
     make install && \
-    cd -
+    cd $HOME && \
+    rm -r ./ipsec-mb
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
@@ -68,7 +69,8 @@ RUN cd $HOME && \
     meson configure -Dmachine=default && \
     ninja && \
     ninja install && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
 
 RUN cd $HOME && \
     git clone --recurse-submodules https://github.com/xdp-project/xdp-tools.git --branch ${XDP_VERSION} --depth 1 ./xdp && \
@@ -77,4 +79,5 @@ RUN cd $HOME && \
     make && \
     make install && \
     ldconfig /usr/local/lib/ && \
-    cd -
+    cd $HOME && \
+    rm -r ./xdp

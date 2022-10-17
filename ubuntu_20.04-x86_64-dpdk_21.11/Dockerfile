@@ -50,7 +50,8 @@ RUN cd $HOME && \
     cd ipsec-mb && \
     make -j $(nproc) && \
     make install && \
-    cd -
+    cd $HOME && \
+    rm -r ./ipsec-mb
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
@@ -60,4 +61,5 @@ RUN cd $HOME && \
     meson configure -Dmachine=default && \
     ninja && \
     ninja install && \
-    cd -
+    cd $HOME && \
+    rm -r ./dpdk
