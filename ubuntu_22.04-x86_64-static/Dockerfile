@@ -26,7 +26,6 @@ RUN apt-get install -yy \
   kmod \
   libconfig-dev \
   libcunit1-dev \
-  libibverbs-dev \
   libnuma-dev \
   libssl-dev \
   libstdc++-9-dev \
@@ -40,14 +39,6 @@ RUN apt-get install -yy \
   net-tools \
   ninja-build \
   sudo
-
-RUN cd $HOME && \
-    git clone https://github.com/intel/intel-ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
-    cd ipsec-mb && \
-    make -j $(nproc) SHARED=n && \
-    make install SHARED=n && \
-    cd $HOME && \
-    rm -r ./ipsec-mb
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
