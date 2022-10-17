@@ -29,7 +29,6 @@ RUN apt-get install -y \
   libssl-dev:arm64 \
   libstdc++-10-dev:arm64 \
   pkg-config-aarch64-linux-gnu \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
@@ -37,18 +36,12 @@ RUN apt-get install -y \
   gcc \
   gcc-10 \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libnuma-dev \
   libtool \
-  mscgen \
   net-tools \
-  python3-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip3 install coverage
+  sudo
 
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \

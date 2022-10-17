@@ -19,12 +19,10 @@ RUN yum install -y \
 	CUnit-devel \
 	curl \
 	diffutils \
-	doxygen \
 	gcc \
 	gcc-c++ \
 	gcc-toolset-11-libatomic-devel \
 	git-core \
-	graphviz \
 	kmod \
 	libatomic \
 	libconfig-devel \

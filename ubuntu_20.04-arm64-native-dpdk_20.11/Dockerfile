@@ -12,7 +12,6 @@ RUN apt-get install -yy --no-install-recommends \
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
@@ -20,7 +19,6 @@ RUN apt-get install -yy \
   gcc \
   gcc-10 \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libcli-dev \
@@ -32,15 +30,12 @@ RUN apt-get install -yy \
   libssl-dev \
   libstdc++-10-dev \
   libtool \
+  make \
   meson \
-  mscgen \
   net-tools \
   ninja-build \
   python3-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip3 install coverage
+  sudo
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \

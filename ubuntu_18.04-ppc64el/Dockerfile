@@ -29,25 +29,18 @@ RUN apt-get install -yy \
   libssl-dev:ppc64el \
   libstdc++-7-dev:ppc64el \
   pkg-config-powerpc64le-linux-gnu \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
   clang \
   gcc \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libnuma-dev \
   libtool \
-  mscgen \
   net-tools \
-  python-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip install coverage
+  sudo
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \

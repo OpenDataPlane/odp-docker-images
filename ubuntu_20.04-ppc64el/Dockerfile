@@ -28,7 +28,6 @@ RUN apt-get install -y \
   libssl-dev:ppc64el \
   libstdc++-10-dev:ppc64el \
   pkg-config-powerpc64le-linux-gnu \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
@@ -36,15 +35,9 @@ RUN apt-get install -y \
   gcc \
   gcc-10 \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libnuma-dev \
   libtool \
-  mscgen \
   net-tools \
-  python3-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip3 install coverage
+  sudo

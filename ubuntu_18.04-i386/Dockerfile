@@ -24,7 +24,6 @@ RUN apt-get install -yy \
   libpcap-dev:i386 \
   libssl-dev:i386 \
   lib32stdc++-7-dev \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
@@ -33,18 +32,12 @@ RUN apt-get install -yy \
   gcc-multilib \
   g++-multilib \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libnuma-dev \
   libtool \
-  mscgen \
   net-tools \
-  python-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip install coverage
+  sudo
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \

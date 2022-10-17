@@ -14,14 +14,12 @@ RUN apt-get install -yy --no-install-recommends \
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
   clang \
   gcc \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libbpf-dev \
@@ -35,16 +33,9 @@ RUN apt-get install -yy \
   libtool \
   llvm-dev \
   meson \
-  mscgen \
   net-tools \
   ninja-build \
-  python3-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip3 install \
-  coverage \
-  pyelftools
+  sudo
 
 RUN cd $HOME && \
     git clone https://github.com/openssl/openssl.git --branch ${OPENSSL_VERSION} --depth 1 ./openssl && \

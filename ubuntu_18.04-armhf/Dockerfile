@@ -24,22 +24,15 @@ RUN apt-get install -yy \
   libssl-dev:armhf \
   libstdc++-7-dev:armhf \
   pkg-config-arm-linux-gnueabihf \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
   clang \
   gcc \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libnuma-dev \
   libtool \
-  mscgen \
   net-tools \
-  python-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip install coverage
+  sudo

@@ -13,7 +13,6 @@ RUN apt-get install -yy --no-install-recommends \
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
-  asciidoctor \
   autoconf \
   automake \
   ccache \
@@ -21,7 +20,6 @@ RUN apt-get install -yy \
   gcc \
   gcc-10 \
   git \
-  graphviz \
   iproute2 \
   kmod \
   libconfig-dev \
@@ -32,16 +30,13 @@ RUN apt-get install -yy \
   libssl-dev \
   libstdc++-10-dev \
   libtool \
+  make \
   meson \
-  mscgen \
   nasm \
   net-tools \
   ninja-build \
   python3-pip \
-  ruby-dev \
-  sudo \
-  xsltproc && \
-pip3 install coverage
+  sudo
 
 RUN cd $HOME && \
     git clone https://github.com/intel/intel-ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
