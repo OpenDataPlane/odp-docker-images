@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ENV DPDK_VERSION=v19.11.6 \
+  IPSEC_MB_VERSION=SECLIB-IPSEC-2022.05.25 \
 	RTE_ARCH=arm64 \
 	RTE_TARGET=arm64-armv8a-linuxapp-gcc
 
@@ -35,6 +36,7 @@ RUN apt-get install -yy \
   libstdc++-10-dev \
   libtool \
   mscgen \
+  nasm \
   net-tools \
   python3-pip \
   ruby-dev \
@@ -61,3 +63,11 @@ RUN cd $HOME && \
     cd aarch64cryptolib && \
     make && \
     cd -
+
+RUN cd $HOME && \
+    git clone https://git.gitlab.arm.com/arm-reference-solutions/ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
+    cd ipsec-mb && \
+    make -j $(nproc) && \
+    make install && \
+    cd $HOME && \
+    rm -r ./ipsec-mb
