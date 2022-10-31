@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 ENV DPDK_VERSION=v20.11.4 \
+  IPSEC_MB_VERSION=SECLIB-IPSEC-2022.05.25 \
   XDP_VERSION=v1.2.3
 
 RUN apt-get update
@@ -38,6 +39,7 @@ RUN apt-get install -yy \
   libtool \
   llvm-dev \
   meson \
+  nasm \
   net-tools \
   ninja-build \
   sudo
@@ -57,6 +59,14 @@ RUN cd $HOME && \
     cd aarch64cryptolib && \
     make && \
     cd -
+
+RUN cd $HOME && \
+    git clone https://git.gitlab.arm.com/arm-reference-solutions/ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
+    cd ipsec-mb && \
+    make -j $(nproc) && \
+    make install && \
+    cd $HOME && \
+    rm -r ./ipsec-mb
 
 RUN cd $HOME && \
     git clone --recurse-submodules https://github.com/xdp-project/xdp-tools.git --branch ${XDP_VERSION} --depth 1 ./xdp && \
