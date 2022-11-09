@@ -1,6 +1,6 @@
 FROM rockylinux:8.5
 
-ENV DPDK_VERSION=v19.11.11 \
+ENV DPDK_VERSION=v19.11.13 \
     RTE_ARCH=x86_64 \
     RTE_TARGET=x86_64-native-linuxapp-gcc
 

@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV DPDK_VERSION=v19.11.6 \
+ENV DPDK_VERSION=v19.11.13 \
 	RTE_ARCH=arm64 \
 	RTE_TARGET=arm64-armv8a-linuxapp-gcc \
 	CROSS_TOOLS=aarch64-linux-gnu-
