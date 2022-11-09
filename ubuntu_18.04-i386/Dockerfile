@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV DPDK_VERSION=v19.11.6 \
+ENV DPDK_VERSION=v19.11.13 \
 	RTE_ARCH=i686 \
 	RTE_TARGET=i686-native-linuxapp-gcc
 

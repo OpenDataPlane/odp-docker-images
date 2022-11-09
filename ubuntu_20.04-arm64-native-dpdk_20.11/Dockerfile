@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v20.11.1
+ENV DPDK_VERSION=v20.11.6
 
 RUN apt-get update
 

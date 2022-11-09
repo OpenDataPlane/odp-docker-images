@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV DPDK_VERSION=v19.11.6 \
+ENV DPDK_VERSION=v19.11.13 \
 	RTE_ARCH=ppc_64 \
 	RTE_TARGET=ppc_64-power8-linuxapp-gcc \
 	CROSS_TOOLS=powerpc64le-linux-gnu-
