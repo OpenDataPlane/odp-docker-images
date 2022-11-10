@@ -62,6 +62,7 @@ RUN cd $HOME && \
     meson build && \
     cd build && \
     meson configure -Dmachine=default && \
+    meson configure -Dtests=false && \
     ninja && \
     ninja install && \
     cd $HOME && \

@@ -42,6 +42,7 @@ RUN cd $HOME && \
     cd dpdk && \
     meson build && \
     cd build && \
+    meson configure -Dtests=false && \
     ninja && \
     ninja install && \
     cd $HOME && \
