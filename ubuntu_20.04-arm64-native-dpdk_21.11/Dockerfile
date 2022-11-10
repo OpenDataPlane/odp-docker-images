@@ -44,6 +44,7 @@ RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     meson build && \
+    meson configure -Dtests=false && \
     cd build && \
     ninja && \
     ninja install && \
