@@ -1,4 +1,4 @@
-FROM rockylinux:8.5
+FROM rockylinux:8
 
 ENV DPDK_VERSION=v19.11.13 \
     RTE_ARCH=x86_64 \
