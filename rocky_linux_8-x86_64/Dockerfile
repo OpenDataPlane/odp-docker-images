@@ -21,7 +21,7 @@ RUN yum install -y \
 	diffutils \
 	gcc \
 	gcc-c++ \
-	gcc-toolset-11-libatomic-devel \
+	gcc-toolset-12-libatomic-devel \
 	git-core \
 	kmod \
 	libatomic \
