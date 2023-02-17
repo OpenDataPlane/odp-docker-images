@@ -35,6 +35,7 @@ jobs:
                 'ubuntu_20.04-x86_64',
                 'ubuntu_20.04-x86_64-dpdk_20.11',
                 'ubuntu_20.04-x86_64-dpdk_21.11',
+                'ubuntu_20.04-x86_64-dpdk_22.11',
                 'ubuntu_22.04-x86_64',
                 'ubuntu_22.04-x86_64-static',
                 'ubuntu_22.04-openssl-x86_64',
@@ -86,6 +87,7 @@ jobs:
                 'ubuntu_20.04-arm64-native',
                 'ubuntu_20.04-arm64-native-dpdk_20.11',
                 'ubuntu_20.04-arm64-native-dpdk_21.11',
+                'ubuntu_20.04-arm64-native-dpdk_22.11',
                 'ubuntu_22.04-arm64-native',
                 'ubuntu_22.04-openssl-arm64-native',
                 'rocky_linux_8-arm64-native']
