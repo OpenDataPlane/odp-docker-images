@@ -30,6 +30,7 @@ jobs:
                 'ubuntu_20.04-ppc64el',
                 'ubuntu_20.04-riscv64',
                 'ubuntu_20.04-x86_64',
+                'ubuntu_20.04-x86_64-dpdk_19.11',
                 'ubuntu_20.04-x86_64-dpdk_20.11',
                 'ubuntu_20.04-x86_64-dpdk_21.11',
                 'ubuntu_20.04-x86_64-dpdk_22.11',
@@ -81,6 +82,7 @@ jobs:
       matrix:
         image: ['ubuntu_18.04-arm64-native',
                 'ubuntu_20.04-arm64-native',
+                'ubuntu_20.04-arm64-native-dpdk_19.11',
                 'ubuntu_20.04-arm64-native-dpdk_20.11',
                 'ubuntu_20.04-arm64-native-dpdk_21.11',
                 'ubuntu_20.04-arm64-native-dpdk_22.11',
