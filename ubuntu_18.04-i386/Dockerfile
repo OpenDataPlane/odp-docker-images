@@ -1,8 +1,6 @@
 FROM ubuntu:18.04
 
-ENV DPDK_VERSION=v19.11.13 \
-	RTE_ARCH=i686 \
-	RTE_TARGET=i686-native-linuxapp-gcc
+ENV DPDK_VERSION=v22.11.1
 
 RUN apt-get update
 
@@ -36,20 +34,26 @@ RUN apt-get install -yy \
   kmod \
   libtool \
   net-tools \
+  ninja-build \
+  python3-pip \
   sudo
+
+RUN pip3 install \
+  meson \
+	pyelftools
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    make config T=${RTE_TARGET} O=${RTE_TARGET} && \
-    cd ${RTE_TARGET} && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
-    sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
-    sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_VHOST_NUMA=).*,\1n,' .config && \
-    sed -ri 's,(CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=).*,\1n,' .config && \
-    cd .. && \
-    make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
+    PKG_CONFIG_LIBDIR=/usr/lib/i386-linux-gnu/pkgconfig \
+    meson setup -Dc_args='-m32' -Dc_link_args='-m32' build && \
+    cd build && \
+    meson configure -Dlibdir=lib/i386-linux-gnu && \
+    meson configure -Dmachine=default && \
+    meson configure -Dprefix=/usr && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
+    ninja && \
+    ninja install && \
     cd $HOME && \
     rm -r ./dpdk

@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v21.11.2 \
+ENV DPDK_VERSION=v21.11.3 \
   IPSEC_MB_VERSION=v1.1
 
 RUN apt-get update
@@ -50,9 +50,10 @@ RUN cd $HOME && \
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    meson build && \
+    meson setup build && \
     cd build && \
     meson configure -Dmachine=default && \
+    meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
     ninja && \
     ninja install && \

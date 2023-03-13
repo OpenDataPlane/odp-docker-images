@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV DPDK_VERSION=v22.11.1
+
 RUN apt-get update
 
 RUN apt-get install -y --no-install-recommends \
@@ -24,7 +26,6 @@ RUN apt-get install -y \
   libcli-dev:arm64 \
   libconfig-dev:arm64 \
   libcunit1-dev:arm64 \
-  libdpdk-dev:arm64 \
   libpcap-dev:arm64 \
   libssl-dev:arm64 \
   libstdc++-10-dev:arm64 \
@@ -39,8 +40,30 @@ RUN apt-get install -y \
   iproute2 \
   kmod \
   libtool \
+  meson \
   net-tools \
+  ninja-build \
+  python3-pip \
   sudo
+
+RUN pip3 install \
+  pyelftools
+
+# '-moutline-atomics' removed to fix clang build
+RUN cd $HOME && \
+    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    cd dpdk && \
+    sed 's/-moutline-atomics//g' -i config/arm/meson.build && \
+    meson setup build --cross-file config/arm/arm64_armv8_linux_gcc && \
+    cd build && \
+    meson configure -Dlibdir=lib/aarch64-linux-gnu && \
+    meson configure -Dprefix=/usr && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
+    ninja && \
+    ninja install && \
+    cd $HOME && \
+    rm -r ./dpdk
 
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \

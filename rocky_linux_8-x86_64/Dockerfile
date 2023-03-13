@@ -1,8 +1,6 @@
 FROM rockylinux:8
 
-ENV DPDK_VERSION=v19.11.13 \
-    RTE_ARCH=x86_64 \
-    RTE_TARGET=x86_64-native-linuxapp-gcc
+ENV DPDK_VERSION=v22.11.1
 
 RUN dnf install -y 'dnf-command(config-manager)'
 RUN dnf config-manager --set-enabled powertools
@@ -26,27 +24,32 @@ RUN yum install -y \
 	kmod \
 	libatomic \
 	libconfig-devel \
+	libibverbs-devel \
 	libpcap-devel \
 	libtool \
 	make \
+	meson \
 	numactl-devel \
 	net-tools \
+	ninja-build \
 	openssl-devel \
 	pkgconfig \
+	python3-pip \
 	procps \
 	sudo
+
+RUN pip3 install \
+	pyelftools
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    make config T=x86_64-native-linuxapp-gcc O=x86_64-native-linuxapp-gcc && \
-    cd x86_64-native-linuxapp-gcc/ && \
-    sed -ri 's,(CONFIG_RTE_MACHINE=).*,\1"default",' .config && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
-    sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
-    sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
-    cd .. && \
-    make -j $(nproc) install T=x86_64-native-linuxapp-gcc DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
+    meson setup build && \
+    cd build && \
+    meson configure -Dmachine=default && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
+    ninja && \
+    ninja install && \
     cd $HOME && \
     rm -r ./dpdk
