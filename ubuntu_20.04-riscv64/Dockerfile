@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV DPDK_VERSION=v22.11.1
+
 RUN apt-get update
 
 RUN apt-get install -y --no-install-recommends \
@@ -38,6 +40,25 @@ RUN apt-get install -y \
   iproute2 \
   kmod \
   libtool \
+  meson \
   net-tools \
+  ninja-build \
+  python3-pip \
   sudo
 
+RUN pip3 install \
+  pyelftools
+
+RUN cd $HOME && \
+    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    cd dpdk && \
+    meson setup build --cross-file config/riscv/riscv64_linux_gcc && \
+    cd build && \
+    meson configure -Dlibdir=lib/riscv64-linux-gnu && \
+    meson configure -Dprefix=/usr && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
+    ninja && \
+    ninja install && \
+    cd $HOME && \
+    rm -r ./dpdk

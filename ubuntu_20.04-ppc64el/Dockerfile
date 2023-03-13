@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV DPDK_VERSION=v22.11.1
+
 RUN apt-get update
 
 RUN apt-get install -y --no-install-recommends \
@@ -23,7 +25,6 @@ RUN apt-get install -y \
   libcli-dev:ppc64el \
   libconfig-dev:ppc64el \
   libcunit1-dev:ppc64el \
-  libdpdk-dev:ppc64el \
   libpcap-dev:ppc64el \
   libssl-dev:ppc64el \
   libstdc++-10-dev:ppc64el \
@@ -38,5 +39,25 @@ RUN apt-get install -y \
   iproute2 \
   kmod \
   libtool \
+  meson \
   net-tools \
+  ninja-build \
+  python3-pip \
   sudo
+
+RUN pip3 install \
+  pyelftools
+
+RUN cd $HOME && \
+    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    cd dpdk && \
+    meson setup build --cross-file config/ppc/ppc64le-power8-linux-gcc-ubuntu && \
+    cd build && \
+    meson configure -Dlibdir=lib/powerpc64le-linux-gnu && \
+    meson configure -Dprefix=/usr && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
+    ninja && \
+    ninja install && \
+    cd $HOME && \
+    rm -r ./dpdk

@@ -1,6 +1,6 @@
 FROM centos:7
 
-ENV DPDK_VERSION=v19.11.13 \
+ENV DPDK_VERSION=v19.11.14 \
     RTE_ARCH=x86_64 \
     RTE_TARGET=x86_64-native-linuxapp-gcc \
     CUNIT_VERSION=2.1-3
