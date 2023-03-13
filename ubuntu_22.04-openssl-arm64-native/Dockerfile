@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-ENV DPDK_VERSION=v20.11.6 \
+ENV DPDK_VERSION=v22.11.1 \
     OPENSSL_VERSION=OpenSSL_1_1_1o \
     XDP_VERSION=v1.2.3
 
@@ -35,7 +35,11 @@ RUN apt-get install -yy \
   meson \
   net-tools \
   ninja-build \
+  python3-pip \
   sudo
+
+RUN pip3 install \
+  pyelftools
 
 RUN cd $HOME && \
     git clone https://github.com/openssl/openssl.git --branch ${OPENSSL_VERSION} --depth 1 ./openssl && \
@@ -49,9 +53,10 @@ RUN cd $HOME && \
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    meson build && \
-    meson configure -Dtests=false && \
+    meson setup build && \
     cd build && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
     ninja && \
     ninja install && \
     cd $HOME && \

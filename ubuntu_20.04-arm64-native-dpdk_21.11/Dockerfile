@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v21.11.2
+ENV DPDK_VERSION=v21.11.3
 
 RUN apt-get update
 
@@ -43,9 +43,10 @@ RUN pip3 install \
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    meson build && \
-    meson configure -Dtests=false && \
+    meson setup build && \
     cd build && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
     ninja && \
     ninja install && \
     cd $HOME && \

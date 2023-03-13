@@ -1,9 +1,7 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v19.11.13 \
-  IPSEC_MB_VERSION=SECLIB-IPSEC-2022.12.13 \
-	RTE_ARCH=arm64 \
-	RTE_TARGET=arm64-armv8a-linuxapp-gcc
+ENV DPDK_VERSION=v22.11.1 \
+    IPSEC_MB_VERSION=SECLIB-IPSEC-2022.12.13
 
 RUN apt-get update
 
@@ -35,26 +33,30 @@ RUN apt-get install -yy \
   libssl-dev \
   libstdc++-10-dev \
   libtool \
+  make \
+  meson \
   mscgen \
   nasm \
   net-tools \
+  ninja-build \
   python3-pip \
   ruby-dev \
   sudo \
-  xsltproc && \
-pip3 install coverage
+  xsltproc
+
+RUN pip3 install \
+  coverage \
+  pyelftools
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    make config T=${RTE_TARGET} O=${RTE_TARGET} && \
-    cd ${RTE_TARGET} && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_PCAP=).*,\1y,' .config && \
-    sed -ri 's,(CONFIG_RTE_LIBRTE_PMD_OPENSSL=).*,\1y,' .config && \
-    sed -ri 's,(CONFIG_RTE_EAL_IGB_UIO=).*,\1n,' .config && \
-    sed -ri 's,(CONFIG_RTE_KNI_KMOD=).*,\1n,' .config && \
-    cd .. && \
-    make -j $(nproc) install T=${RTE_TARGET} DESTDIR=/usr EXTRA_CFLAGS="-fPIC" && \
+    meson setup build && \
+    cd build && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
+    ninja && \
+    ninja install && \
     cd $HOME && \
     rm -r ./dpdk
 

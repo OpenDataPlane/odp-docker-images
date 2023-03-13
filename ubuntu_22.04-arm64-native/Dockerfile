@@ -1,8 +1,8 @@
 FROM ubuntu:22.04
 
-ENV DPDK_VERSION=v20.11.6 \
-  IPSEC_MB_VERSION=SECLIB-IPSEC-2022.12.13 \
-  XDP_VERSION=v1.2.3
+ENV DPDK_VERSION=v22.11.1 \
+    IPSEC_MB_VERSION=SECLIB-IPSEC-2022.12.13 \
+    XDP_VERSION=v1.2.3
 
 RUN apt-get update
 
@@ -42,14 +42,19 @@ RUN apt-get install -yy \
   nasm \
   net-tools \
   ninja-build \
+  python3-pip \
   sudo
+
+RUN pip3 install \
+  pyelftools
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    meson build && \
-    meson configure -Dtests=false && \
+    meson setup build && \
     cd build && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
     ninja && \
     ninja install && \
     cd $HOME && \
