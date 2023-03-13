@@ -27,8 +27,6 @@ RUN apt-get install -yy \
   libbpf-dev \
   libconfig-dev \
   libcunit1-dev \
-  libibverbs-dev \
-  libnuma-dev \
   libpcap-dev \
   libstdc++-10-dev \
   libtool \

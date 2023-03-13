@@ -37,7 +37,6 @@ RUN apt-get install -y \
   git \
   iproute2 \
   kmod \
-  libnuma-dev \
   libtool \
   net-tools \
   sudo
