@@ -41,9 +41,10 @@ RUN pip3 install \
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    meson build && \
-    meson configure -Dtests=false && \
+    meson setup build && \
     cd build && \
+    meson configure -Ddisable_apps=* && \
+    meson configure -Dtests=false && \
     ninja && \
     ninja install && \
     cd $HOME && \

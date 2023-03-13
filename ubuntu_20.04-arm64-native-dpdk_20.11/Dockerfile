@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v20.11.6 \
+ENV DPDK_VERSION=v20.11.7 \
     AARCH64_CRYPTOLIB_TAG=2445f0e
 
 RUN apt-get update
@@ -39,8 +39,9 @@ RUN apt-get install -yy \
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
-    meson build && \
+    meson setup build && \
     cd build && \
+    meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
     ninja && \
     ninja install && \
