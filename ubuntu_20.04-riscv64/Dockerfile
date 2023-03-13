@@ -39,7 +39,6 @@ RUN apt-get install -y \
   git \
   iproute2 \
   kmod \
-  libnuma-dev \
   libtool \
   meson \
   net-tools \

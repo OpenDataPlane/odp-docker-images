@@ -25,7 +25,6 @@ RUN apt-get install -yy \
   kmod \
   libconfig-dev \
   libcunit1-dev \
-  libnuma-dev \
   libssl-dev \
   libstdc++-9-dev \
   libstdc++-10-dev \
@@ -34,7 +33,6 @@ RUN apt-get install -yy \
   libtool \
   llvm-dev \
   meson \
-  nasm \
   net-tools \
   ninja-build \
   python3-pip \

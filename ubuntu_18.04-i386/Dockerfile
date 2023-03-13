@@ -32,7 +32,6 @@ RUN apt-get install -yy \
   git \
   iproute2 \
   kmod \
-  libnuma-dev \
   libtool \
   net-tools \
   ninja-build \

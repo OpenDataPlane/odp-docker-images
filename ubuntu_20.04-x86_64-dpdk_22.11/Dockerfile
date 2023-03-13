@@ -24,8 +24,6 @@ RUN apt-get install -yy \
   kmod \
   libconfig-dev \
   libcunit1-dev \
-  libibverbs-dev \
-  libnuma-dev \
   libpcap-dev \
   libssl-dev \
   libstdc++-10-dev \
