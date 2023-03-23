@@ -2,7 +2,8 @@ FROM ubuntu:18.04
 
 ENV DPDK_VERSION=v19.11.13 \
 	RTE_ARCH=arm64 \
-	RTE_TARGET=arm64-armv8a-linuxapp-gcc
+	RTE_TARGET=arm64-armv8a-linuxapp-gcc \
+	AARCH64_CRYPTOLIB_TAG=2445f0e
 
 RUN apt-get update
 
@@ -51,5 +52,6 @@ RUN cd $HOME && \
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
     cd aarch64cryptolib && \
-    make && \
+    git checkout ${AARCH64_CRYPTOLIB_TAG} && \
+    make OPT=big && \
     cd -
