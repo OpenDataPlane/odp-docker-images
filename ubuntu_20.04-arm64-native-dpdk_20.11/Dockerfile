@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v20.11.6
+ENV DPDK_VERSION=v20.11.6 \
+    AARCH64_CRYPTOLIB_TAG=2445f0e
 
 RUN apt-get update
 
@@ -49,5 +50,6 @@ RUN cd $HOME && \
 RUN cd $HOME && \
     git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
     cd aarch64cryptolib && \
-    make && \
+    git checkout ${AARCH64_CRYPTOLIB_TAG} && \
+    make OPT=big && \
     cd -
