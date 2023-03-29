@@ -26,6 +26,7 @@ RUN yum install -y \
 	kmod \
 	libatomic \
 	libconfig-devel \
+	libibverbs-devel \
 	libpcap-devel \
 	libtool \
 	make \
