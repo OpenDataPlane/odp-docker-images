@@ -16,6 +16,7 @@ RUN apt-get update --fix-missing
 RUN apt-get install -yy \
   autoconf \
   automake \
+  build-essential \
   ccache \
   clang \
   gcc \
