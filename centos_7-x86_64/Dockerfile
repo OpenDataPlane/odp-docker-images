@@ -3,7 +3,8 @@ FROM centos:7
 ENV DPDK_VERSION=v19.11.14 \
     RTE_ARCH=x86_64 \
     RTE_TARGET=x86_64-native-linuxapp-gcc \
-    CUNIT_VERSION=2.1-3
+    CUNIT_VERSION=2.1-3 \
+    LIBCONFIG_VERSION=v1.5
 
 RUN yum update -y
 
@@ -16,13 +17,13 @@ RUN yum install -y \
 	bzip2 \
 	clang \
 	curl \
+	flex \
 	gcc \
 	gcc-c++ \
 	git-core \
 	kmod \
 	libatomic \
 	libcli-devel \
-	libconfig-devel \
 	libpcap-devel \
 	libtool \
 	make \
@@ -42,6 +43,17 @@ RUN cd $HOME && \
     make install && \
     cd $HOME && \
     rm -r ./CUnit*
+
+RUN cd $HOME && \
+    git clone https://github.com/hyperrealm/libconfig.git --branch ${LIBCONFIG_VERSION} --depth 1 ./libconfig && \
+    cd libconfig && \
+    autoreconf -i && \
+    ./configure --prefix=/usr/ && \
+    make && \
+    make install && \
+    ldconfig /usr/lib/ && \
+    cd $HOME && \
+    rm -r ./libconfig
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
