@@ -12,6 +12,9 @@ RUN apt-get install -yy --no-install-recommends \
 	dirmngr \
 	gnupg-agent
 
+# Required for gcc-13
+RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
+
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
@@ -23,6 +26,7 @@ RUN apt-get install -yy \
   gcc-10 \
   gcc-11 \
   gcc-12 \
+  gcc-13 \
   git \
   iproute2 \
   kmod \
@@ -35,6 +39,7 @@ RUN apt-get install -yy \
   libstdc++-10-dev \
   libstdc++-11-dev \
   libstdc++-12-dev \
+  libstdc++-13-dev \
   libtool \
   llvm-dev \
   meson \
