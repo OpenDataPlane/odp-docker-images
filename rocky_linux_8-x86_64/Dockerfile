@@ -1,6 +1,6 @@
 FROM rockylinux:8
 
-ENV DPDK_VERSION=v22.11.1
+ENV DPDK_VERSION=v22.11.3
 
 RUN dnf install -y 'dnf-command(config-manager)'
 RUN dnf config-manager --set-enabled powertools
