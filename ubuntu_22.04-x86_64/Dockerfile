@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-ENV DPDK_VERSION=v22.11.1 \
+ENV DPDK_VERSION=v22.11.3 \
     XDP_VERSION=v1.2.3
 
 RUN apt-get update

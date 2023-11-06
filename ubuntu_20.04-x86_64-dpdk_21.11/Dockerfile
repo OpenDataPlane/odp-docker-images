@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV DPDK_VERSION=v21.11.3 \
+ENV DPDK_VERSION=v21.11.5 \
   IPSEC_MB_VERSION=v1.1
 
 RUN apt-get update
