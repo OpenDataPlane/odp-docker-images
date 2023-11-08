@@ -50,11 +50,11 @@ RUN cd $HOME && \
     cd dpdk && \
     meson setup build --cross-file config/arm/arm64_armv8_linux_gcc && \
     cd build && \
-    meson configure -Ddisable_drivers=event/cnxk && \
     meson configure -Dlibdir=lib/aarch64-linux-gnu && \
     meson configure -Dprefix=/usr && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
+    meson configure -Denable_drivers=crypto/*,dma/*,net/pcap && \
     ninja && \
     ninja install && \
     cd $HOME && \

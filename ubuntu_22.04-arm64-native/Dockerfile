@@ -59,6 +59,7 @@ RUN cd $HOME && \
     cd build && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
+    meson configure -Denable_drivers=crypto/*,dma/*,net/pcap && \
     ninja && \
     ninja install && \
     cd $HOME && \
