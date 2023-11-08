@@ -43,6 +43,7 @@ RUN cd $HOME && \
     cd build && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
+    meson configure -Ddisable_drivers=baseband/*,event/*,raw/* && \
     ninja && \
     ninja install && \
     cd $HOME && \

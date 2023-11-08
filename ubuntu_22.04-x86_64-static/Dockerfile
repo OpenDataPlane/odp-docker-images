@@ -50,6 +50,7 @@ RUN cd $HOME && \
     meson configure -Ddefault_library=static && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
+    meson configure -Denable_drivers=crypto/*,dma/*,net/pcap && \
     ninja && \
     ninja install && \
     cd $HOME && \
