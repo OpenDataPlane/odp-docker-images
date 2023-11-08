@@ -19,6 +19,8 @@ RUN apt-get install -yy \
   ccache \
   clang \
   gcc \
+  gcc-7 \
+  gcc-8 \
   gcc-10 \
   git \
   graphviz \
@@ -29,6 +31,8 @@ RUN apt-get install -yy \
   libcunit1-dev \
   libpcap-dev \
   libssl-dev \
+  libstdc++-7-dev \
+  libstdc++-8-dev \
   libstdc++-10-dev \
   libtool \
   make \
