@@ -20,7 +20,7 @@ RUN yum install -y \
 	diffutils \
 	gcc \
 	gcc-c++ \
-	gcc-toolset-12-libatomic-devel \
+	gcc-toolset-13-libatomic-devel \
 	git-core \
 	glibc-static \
 	kmod \
