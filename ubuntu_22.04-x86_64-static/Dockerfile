@@ -46,7 +46,7 @@ RUN cd $HOME && \
     cd dpdk && \
     meson setup build && \
     cd build && \
-    meson configure -Dmachine=default && \
+    meson configure -Dplatform=generic && \
     meson configure -Ddefault_library=static && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \

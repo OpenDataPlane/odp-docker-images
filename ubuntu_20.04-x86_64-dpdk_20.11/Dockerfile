@@ -49,7 +49,7 @@ RUN cd $HOME && \
     cd dpdk && \
     meson setup build && \
     cd build && \
-    meson configure -Dmachine=default && \
+    meson configure -Dplatform=generic && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
     meson configure -Ddisable_drivers=baseband/*,event/*,raw/* && \
