@@ -43,7 +43,6 @@ RUN cd $HOME && \
     cd dpdk && \
     meson setup build && \
     cd build && \
-    meson configure -Dplatform=generic && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
     meson configure -Denable_drivers=crypto/*,dma/*,net/pcap && \
