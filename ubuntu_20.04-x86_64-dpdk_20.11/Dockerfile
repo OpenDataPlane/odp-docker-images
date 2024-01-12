@@ -53,7 +53,7 @@ RUN cd $HOME && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
     meson configure -Ddisable_drivers=baseband/*,event/*,raw/* && \
-    ninja && \
     ninja install && \
+    ldconfig && \
     cd $HOME && \
     rm -r ./dpdk

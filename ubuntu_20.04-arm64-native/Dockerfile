@@ -57,8 +57,8 @@ RUN cd $HOME && \
     meson configure -Ddisable_apps=* && \
     meson configure -Dtests=false && \
     meson configure -Denable_drivers=crypto/*,dma/*,net/pcap && \
-    ninja && \
     ninja install && \
+    ldconfig && \
     cd $HOME && \
     rm -r ./dpdk
 
