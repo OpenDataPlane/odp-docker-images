@@ -1,7 +1,8 @@
 FROM ubuntu:22.04
 
 ENV DPDK_VERSION=v22.11.3 \
-    XDP_VERSION=v1.2.3
+    XDP_VERSION=v1.2.3 \
+    ONNX_VERSION=1.16.3
 
 RUN apt-get update
 
@@ -44,10 +45,19 @@ RUN apt-get install -yy \
   net-tools \
   ninja-build \
   python3-pip \
-  sudo
+  sudo \
+  wget
 
 RUN pip3 install \
+  numpy \
+  onnx \
   pyelftools
+
+RUN cd /usr/local && \
+    wget -O - \
+        https://github.com/microsoft/onnxruntime/releases/download/v${ONNX_VERSION}/onnxruntime-linux-x64-${ONNX_VERSION}.tgz | \
+        tar zx --strip-components=1 --wildcards "*/include" "*/lib" && \
+    ldconfig
 
 RUN cd $HOME && \
     git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
