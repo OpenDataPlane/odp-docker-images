@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-ENV DPDK_VERSION=v22.11.3
+ENV DPDK_VERSION=v22.11.4
 
 RUN apt-get update
 

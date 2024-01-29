@@ -1,6 +1,6 @@
 FROM ubuntu:23.04
 
-ENV DPDK_VERSION=v22.11.3 \
+ENV DPDK_VERSION=v22.11.4 \
     XDP_VERSION=v1.2.3
 
 RUN apt-get update
