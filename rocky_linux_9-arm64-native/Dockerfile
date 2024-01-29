@@ -1,6 +1,6 @@
 FROM rockylinux:9
 
-ENV DPDK_VERSION=v22.11.3 \
+ENV DPDK_VERSION=v22.11.4 \
     AARCH64_CRYPTOLIB_TAG=2445f0e
 
 RUN dnf install -y 'dnf-command(config-manager)'
