@@ -22,9 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ['ubuntu_18.04-arm64',
-                'ubuntu_18.04-i386',
-                'ubuntu_18.04-x86_64',
+        image: ['ubuntu_18.04-i386',
                 'ubuntu_20.04-arm64',
                 'ubuntu_20.04-armhf',
                 'ubuntu_20.04-ppc64el',
@@ -82,8 +80,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ['ubuntu_18.04-arm64-native',
-                'ubuntu_20.04-arm64-native',
+        image: ['ubuntu_20.04-arm64-native',
                 'ubuntu_20.04-arm64-native-dpdk_19.11',
                 'ubuntu_20.04-arm64-native-dpdk_20.11',
                 'ubuntu_20.04-arm64-native-dpdk_21.11',
