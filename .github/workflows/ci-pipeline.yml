@@ -36,7 +36,6 @@ jobs:
                 'ubuntu_22.04-x86_64',
                 'ubuntu_22.04-x86_64-static',
                 'ubuntu_23.04-x86_64',
-                'centos_7-x86_64',
                 'rocky_linux_8-x86_64',
                 'rocky_linux_9-x86_64']
 
