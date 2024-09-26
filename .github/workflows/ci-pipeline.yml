@@ -80,6 +80,8 @@ jobs:
       fail-fast: false
       matrix:
         image: ['ubuntu_20.04-arm64-graviton3',
+                'ubuntu_20.04-arm64-graviton3-dpdk_19.11',
+                'ubuntu_20.04-arm64-graviton3-dpdk_20.11',
                 'ubuntu_20.04-arm64-graviton3-dpdk_21.11',
                 'ubuntu_20.04-arm64-graviton3-dpdk_22.11',
                 'ubuntu_20.04-arm64-graviton3-dpdk_23.11',
