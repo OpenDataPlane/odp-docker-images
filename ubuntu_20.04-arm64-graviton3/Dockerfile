@@ -19,6 +19,7 @@ RUN apt-get install -yy \
   automake \
   ccache \
   clang \
+  clang-12 \
   gcc \
   gcc-10 \
   git \
