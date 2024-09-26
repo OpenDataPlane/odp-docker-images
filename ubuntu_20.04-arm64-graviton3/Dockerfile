@@ -18,7 +18,6 @@ RUN apt-get install -yy \
   autoconf \
   automake \
   ccache \
-  clang \
   clang-12 \
   gcc \
   gcc-10 \
@@ -45,6 +44,10 @@ RUN apt-get install -yy \
   ruby-dev \
   sudo \
   xsltproc
+
+RUN cd /usr/bin && \
+  ln -s ../lib/llvm-12/bin/clang clang && \
+  ln -s ../lib/llvm-12/bin/clang++ clang++ 
 
 RUN pip3 install \
   coverage \
