@@ -22,7 +22,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ['ubuntu_18.04-i386',
+        image: ['debian_12-i386',
+                'ubuntu_18.04-i386',
                 'ubuntu_20.04-arm64',
                 'ubuntu_20.04-armhf',
                 'ubuntu_20.04-ppc64el',
