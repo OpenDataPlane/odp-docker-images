@@ -15,7 +15,7 @@ on:
 
 jobs:
   x86_64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     env:
       IMAGE_DIR: ${{matrix.image}}
       IMAGE_NAME: odp-ci-${{matrix.image}}
