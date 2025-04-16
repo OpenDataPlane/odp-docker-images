@@ -15,7 +15,7 @@ on:
 
 jobs:
   x86_64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     env:
       IMAGE_DIR: ${{matrix.image}}
       IMAGE_NAME: odp-ci-${{matrix.image}}
@@ -40,6 +40,8 @@ jobs:
                 'ubuntu_24.04-ppc64el',
                 'ubuntu_24.04-riscv64',
                 'ubuntu_24.04-x86_64',
+                'ubuntu_24.04-x86_64-dpdk_22.11',
+                'ubuntu_24.04-x86_64-dpdk_24.11',
                 'rocky_linux_8-x86_64',
                 'rocky_linux_9-x86_64']
 

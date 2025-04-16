@@ -1,6 +1,6 @@
 FROM i386/debian:12
 
-ENV DPDK_VERSION=v22.11.6
+ENV DPDK_VERSION=v23.11.3
 
 RUN apt-get update
 
@@ -23,6 +23,7 @@ RUN apt-get install -yy \
   libcli-dev:i386 \
   libconfig-dev:i386 \
   libcunit1-dev:i386 \
+  libnuma-dev \
   libpcap-dev:i386 \
   libssl-dev:i386 \
   g++-multilib \
