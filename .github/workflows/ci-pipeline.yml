@@ -15,7 +15,7 @@ on:
 
 jobs:
   x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       IMAGE_DIR: ${{matrix.image}}
       IMAGE_NAME: odp-ci-${{matrix.image}}
@@ -78,7 +78,7 @@ jobs:
   arm64:
     # Ensuring CI is only run on repo where self-hosted runners are installed
     if: ${{ github.repository == 'OpenDataPlane/odp-docker-images' }}
-    runs-on: ah-ubuntu_22_04-c7g_2x-50
+    runs-on: ah-ubuntu_24_04-c7g_2x-50
     env:
       IMAGE_DIR: ${{matrix.image}}
       IMAGE_NAME: odp-ci-${{matrix.image}}
@@ -127,7 +127,7 @@ jobs:
           docker push $IMAGE_ID:$VERSION
 
   Coverity:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       COVERITY_TOKEN_ODP: ${{ secrets.COVERITY_TOKEN_ODP }}
       COVERITY_TOKEN_ODP_DPDK: ${{ secrets.COVERITY_TOKEN_ODP_DPDK }}
