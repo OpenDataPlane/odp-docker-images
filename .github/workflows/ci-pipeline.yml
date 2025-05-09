@@ -93,6 +93,7 @@ jobs:
                 'ubuntu_20.04-arm64-graviton3-dpdk_23.11',
                 'ubuntu_22.04-arm64-graviton3',
                 'ubuntu_24.04-arm64-graviton3',
+                'ubuntu_24.04-arm64-graviton3-dpdk_22.11',
                 'rocky_linux_8-arm64-graviton3',
                 'rocky_linux_9-arm64-graviton3']
 
