@@ -56,7 +56,7 @@ RUN cd $HOME && \
     rm -r ./libconfig
 
 RUN cd $HOME && \
-    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     make config T=x86_64-native-linuxapp-gcc O=x86_64-native-linuxapp-gcc && \
     cd x86_64-native-linuxapp-gcc/ && \

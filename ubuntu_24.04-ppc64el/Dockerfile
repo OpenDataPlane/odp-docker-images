@@ -78,7 +78,7 @@ RUN apt-get install -y \
   sudo
 
 RUN cd $HOME && \
-    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     meson setup build --cross-file config/ppc/ppc64le-power8-linux-gcc-ubuntu && \
     cd build && \

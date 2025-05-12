@@ -38,7 +38,7 @@ RUN apt-get install -yy \
   sudo
 
 RUN cd $HOME && \
-    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     make config T=${RTE_TARGET} O=${RTE_TARGET} && \
     cd ${RTE_TARGET} && \
