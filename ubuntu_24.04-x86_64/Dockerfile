@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 
-ENV DPDK_VERSION=v22.11.6 \
+ENV DPDK_VERSION=v23.11.4 \
     XDP_VERSION=v1.2.3
 
 RUN apt-get update
@@ -33,6 +33,7 @@ RUN apt-get install -yy \
   libbpf-dev \
   libconfig-dev \
   libcunit1-dev \
+  libnuma-dev \
   libpcap-dev \
   libssl-dev \
   libstdc++-9-dev \
