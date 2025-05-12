@@ -43,7 +43,7 @@ RUN pip3 install \
 	pyelftools
 
 RUN cd $HOME && \
-    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     PKG_CONFIG_LIBDIR=/usr/lib/i386-linux-gnu/pkgconfig \
     meson setup -Dc_args='-m32' -Dc_link_args='-m32' build && \

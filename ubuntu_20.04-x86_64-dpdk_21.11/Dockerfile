@@ -48,7 +48,7 @@ RUN cd $HOME && \
     rm -r ./ipsec-mb
 
 RUN cd $HOME && \
-    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     meson setup build && \
     cd build && \

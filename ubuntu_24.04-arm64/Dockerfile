@@ -80,7 +80,7 @@ RUN apt-get install -y \
 
 # '-moutline-atomics' removed to fix clang build
 RUN cd $HOME && \
-    git clone http://dpdk.org/git/dpdk-stable --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
+    git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
     cd dpdk && \
     sed 's/-moutline-atomics//g' -i config/arm/meson.build && \
     meson setup build --cross-file config/arm/arm64_armv8_linux_gcc && \
