@@ -2,7 +2,8 @@ FROM ubuntu:24.04
 
 ENV DPDK_VERSION=v23.11.4 \
     IPSEC_MB_VERSION=SECLIB-IPSEC-2022.12.13 \
-    XDP_VERSION=v1.2.3
+    XDP_VERSION=v1.2.3 \
+    AARCH64_CRYPTOLIB_TAG=2445f0e
 
 RUN apt-get update
 
@@ -14,6 +15,7 @@ RUN apt-get install -yy --no-install-recommends \
 RUN apt-get update --fix-missing
 
 RUN apt-get install -yy \
+  asciidoctor \
   autoconf \
   automake \
   ccache \
@@ -26,6 +28,7 @@ RUN apt-get install -yy \
   gcc-13 \
   gcc-14 \
   git \
+  graphviz \
   iproute2 \
   kmod \
   libbpf-dev \
@@ -44,6 +47,7 @@ RUN apt-get install -yy \
   libtool \
   llvm-dev \
   meson \
+  mscgen \
   nasm \
   net-tools \
   ninja-build \
@@ -63,6 +67,13 @@ RUN cd $HOME && \
     ldconfig && \
     cd $HOME && \
     rm -r ./dpdk
+
+RUN cd $HOME && \
+    git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
+    cd aarch64cryptolib && \
+    git checkout ${AARCH64_CRYPTOLIB_TAG} && \
+    make OPT=big && \
+    cd -
 
 RUN cd $HOME && \
     git clone https://git.gitlab.arm.com/arm-reference-solutions/ipsec-mb.git --branch ${IPSEC_MB_VERSION} --depth 1 ./ipsec-mb && \
