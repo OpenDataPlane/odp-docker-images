@@ -57,7 +57,7 @@ RUN cd $HOME && \
     rm -r ./dpdk
 
 RUN cd $HOME && \
-    git clone https://github.com/ARM-software/AArch64cryptolib --depth 1 ./aarch64cryptolib && \
+    git clone https://github.com/ARM-software/AArch64cryptolib ./aarch64cryptolib && \
     cd aarch64cryptolib && \
     git checkout ${AARCH64_CRYPTOLIB_TAG} && \
     make OPT=big && \
