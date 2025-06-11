@@ -25,8 +25,6 @@ EOF
 
 RUN apt-get update --fix-missing
 
-RUN apt-get install -y --allow-downgrades perl-base=5.36.0-7+deb12u1
-
 RUN apt-get install -yy \
   libcli-dev:i386 \
   libconfig-dev:i386 \
@@ -54,7 +52,8 @@ RUN apt-get install -yy \
   python3-pip \
   sudo \
   meson \
-  python3-pyelftools
+  python3-pyelftools \
+  perl-base
 
 RUN cd $HOME && \
   git clone https://github.com/DPDK/dpdk-stable.git --branch ${DPDK_VERSION} --depth 1 ./dpdk && \
