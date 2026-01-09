@@ -61,6 +61,7 @@ RUN apt-get install -y \
   libpcap-dev:arm64 \
   libssl-dev:arm64 \
   libstdc++-10-dev:arm64 \
+  libsystemd-dev:arm64 \
   autoconf \
   automake \
   ccache \
