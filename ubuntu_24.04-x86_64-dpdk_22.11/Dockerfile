@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 
-ENV DPDK_VERSION=v22.11.7 \
+ENV DPDK_VERSION=v22.11.11 \
   IPSEC_MB_VERSION=v1.5
 
 RUN apt-get update
