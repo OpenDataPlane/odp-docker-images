@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-ENV DPDK_VERSION=v22.11.6 \
+ENV DPDK_VERSION=v23.11.5 \
     XDP_VERSION=v1.2.3 \
     ONNX_VERSION=1.16.3
 
@@ -33,6 +33,7 @@ RUN apt-get install -yy \
   libbpf-dev \
   libconfig-dev \
   libcunit1-dev \
+  libnuma-dev \
   libpcap-dev \
   libssl-dev \
   libstdc++-10-dev \
