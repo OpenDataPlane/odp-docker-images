@@ -125,20 +125,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ['ubuntu_20.04-x86_64-coverity-linux-generic',
-                'ubuntu_20.04-x86_64-coverity-linux-dpdk']
+        image: ['ubuntu_24.04-x86_64-coverity-linux-generic',
+                'ubuntu_24.04-x86_64-coverity-linux-dpdk']
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Build linux-generic image
-        if: ${{ env.COVERITY_TOKEN_ODP && env.IMAGE_DIR == 'ubuntu_20.04-x86_64-coverity-linux-generic' }}
+        if: ${{ env.COVERITY_TOKEN_ODP && env.IMAGE_DIR == 'ubuntu_24.04-x86_64-coverity-linux-generic' }}
         run: |
           docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN_ODP }} $IMAGE_DIR -t $IMAGE_NAME
           echo "push_image=true" >> $GITHUB_ENV
 
       - name: Build linux-dpdk image
-        if: ${{ env.COVERITY_TOKEN_ODP_DPDK && env.IMAGE_DIR == 'ubuntu_20.04-x86_64-coverity-linux-dpdk' }}
+        if: ${{ env.COVERITY_TOKEN_ODP_DPDK && env.IMAGE_DIR == 'ubuntu_24.04-x86_64-coverity-linux-dpdk' }}
         run: |
           docker build --build-arg COVERITY_TOKEN=${{ secrets.COVERITY_TOKEN_ODP_DPDK }} $IMAGE_DIR -t $IMAGE_NAME
           echo "push_image=true" >> $GITHUB_ENV
