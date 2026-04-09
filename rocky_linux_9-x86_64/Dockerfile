@@ -1,6 +1,6 @@
 FROM rockylinux:9
 
-ENV DPDK_VERSION=v23.11.5
+ENV DPDK_VERSION=v24.11.4
 
 RUN dnf install -y 'dnf-command(config-manager)'
 RUN dnf config-manager --enable crb
