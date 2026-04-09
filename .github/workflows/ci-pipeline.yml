@@ -36,7 +36,7 @@ jobs:
                 'rocky_linux_9-x86_64']
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build image
         run: docker build $IMAGE_DIR -t $IMAGE_NAME
@@ -84,7 +84,7 @@ jobs:
                 'rocky_linux_9-arm64-graviton3']
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build image
         run: docker build $IMAGE_DIR -t $IMAGE_NAME
@@ -127,7 +127,7 @@ jobs:
                 'ubuntu_24.04-x86_64-coverity-linux-dpdk']
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build linux-generic image
         if: ${{ env.COVERITY_TOKEN_ODP && env.IMAGE_DIR == 'ubuntu_24.04-x86_64-coverity-linux-generic' }}

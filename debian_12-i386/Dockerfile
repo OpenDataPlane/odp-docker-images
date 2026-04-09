@@ -1,6 +1,6 @@
 FROM debian:12
 
-ENV DPDK_VERSION=v23.11.5
+ENV DPDK_VERSION=v24.11.4
 
 RUN apt-get update
 
