@@ -22,6 +22,7 @@ RUN yum install -y \
 	gcc-c++ \
 	gcc-toolset-14-libatomic-devel \
 	git-core \
+	glibc-devel \
 	glibc-static \
 	kmod \
 	libatomic \
