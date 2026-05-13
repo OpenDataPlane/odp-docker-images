@@ -28,6 +28,7 @@ RUN apt-get install -yy \
   libbpf-dev \
   libconfig-dev \
   libcunit1-dev \
+  libjitterentropy3-dev \
   libnuma-dev \
   libonnxruntime-dev \
   libpcap-dev \
