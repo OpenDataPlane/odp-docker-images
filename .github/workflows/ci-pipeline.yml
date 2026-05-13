@@ -32,6 +32,7 @@ jobs:
                 'ubuntu_24.04-x86_64-dpdk_23.11',
                 'ubuntu_24.04-x86_64-dpdk_25.11',
                 'ubuntu_25.10-x86_64',
+                'ubuntu_26.04-x86_64',
                 'rocky_linux_8-x86_64',
                 'rocky_linux_9-x86_64']
 
@@ -80,6 +81,7 @@ jobs:
                 'ubuntu_24.04-arm64-graviton3-dpdk_23.11',
                 'ubuntu_24.04-arm64-graviton3-dpdk_25.11',
                 'ubuntu_25.10-arm64-graviton3',
+                'ubuntu_26.04-arm64-graviton3',
                 'rocky_linux_8-arm64-graviton3',
                 'rocky_linux_9-arm64-graviton3']
 
