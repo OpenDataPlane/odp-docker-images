@@ -30,6 +30,7 @@ RUN apt-get install -yy \
   libcli-dev \
   libconfig-dev \
   libcunit1-dev \
+  libjitterentropy3-dev \
   libonnxruntime-dev \
   libpcap-dev \
   libssl-dev \
